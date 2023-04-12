@@ -1,2 +1,3 @@
-# GiT2023FinalProject
-Final project for the Sky Get Into Tech programme
+# Final project for the Sky Get Into Tech programme
+
+Team 3: Amy, Faye, Hazel, Karen, Vicki
