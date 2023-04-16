@@ -1,12 +1,12 @@
 -- Database tables
 create table if not exists customer(
-customer_id smallint not null primary key auto_increment,
+customer_id mediumint not null primary key auto_increment,
 first_name varchar(50) not null,
 last_name varchar(50) not null,
 email varchar(50) not null,
 phone_number varchar(20),
 account_status enum("Active", "Disabled", "Closed") not null,
-customer_password varchar(20) not null,
+customer_password varchar(100) not null,
 join_date date not null);
 
 create table if not exists game(
@@ -19,7 +19,7 @@ gameplay enum("competitive", "co-operative"),
 game_description text);
 
 create table if not exists cafesession(
-session_id smallint not null auto_increment primary Key,
+session_id mediumint not null auto_increment primary key,
 session_type enum("Lunchtime", "Afternoon", "Evening") not null,
 session_date date not null,
 table_count smallint not null);
@@ -29,7 +29,7 @@ stock_id smallint not null auto_increment primary key,
 game_id smallint not null, foreign key(game_id) references game(game_id));
 
 create table if not exists review(
-review_id smallint not null auto_increment primary key,
+review_id mediumint not null auto_increment primary key,
 review text(4000),
 stars tinyint,
 review_date date not null,
@@ -37,12 +37,14 @@ customer_id smallint not null, foreign key(customer_id) references customer(cust
 game_id smallint not null, foreign key(game_id) references game(game_id));
 
 create table if not exists booking(
-booking_id smallint not null primary key auto_increment,
+booking_id mediumint not null primary key auto_increment,
 -- table_total smallint not null,
 -- guest_total smallint,
-customer_id smallint not null, foreign key(customer_id) references customer(customer_id),
-session_id smallint not null, foreign key(session_id) references cafesession(session_id),
-stock_id smallint, foreign key(stock_id) references stock(stock_id));
+stock_id smallint, foreign key(stock_id) references stock(stock_id),
+session_id mediumint not null, foreign key(session_id) references cafesession(session_id),
+customer_id mediumint not null, foreign key(customer_id) references customer(customer_id),
+number_of_tables tinyint);
+
 
 -- Initial data imported into database
 insert into customer values(1, "Melissa", "Rogen", "melissa.rogen@fakemail.com", "09745451215", "Active", "mypassword", "2023-04-10");
