@@ -38,6 +38,8 @@ game_id smallint not null, foreign key(game_id) references game(game_id));
 
 create table if not exists booking(
 booking_id mediumint not null primary key auto_increment,
+-- table_total smallint not null,
+-- guest_total smallint,
 stock_id smallint, foreign key(stock_id) references stock(stock_id),
 session_id mediumint not null, foreign key(session_id) references cafesession(session_id),
 customer_id mediumint not null, foreign key(customer_id) references customer(customer_id),
