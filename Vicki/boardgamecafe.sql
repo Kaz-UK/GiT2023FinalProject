@@ -1,4 +1,6 @@
--- Database tables
+create database boardgamecafe;
+use boardgamecafe;
+
 create table if not exists customer(
 customer_id mediumint not null primary key auto_increment,
 first_name varchar(50) not null,
@@ -38,6 +40,8 @@ game_id smallint not null, foreign key(game_id) references game(game_id));
 
 create table if not exists booking(
 booking_id mediumint not null primary key auto_increment,
+-- table_total smallint not null,
+-- guest_total smallint,
 stock_id smallint, foreign key(stock_id) references stock(stock_id),
 session_id mediumint not null, foreign key(session_id) references cafesession(session_id),
 customer_id mediumint not null, foreign key(customer_id) references customer(customer_id),
@@ -173,5 +177,17 @@ insert into stock values(14, 14);
 insert into stock values(15, 15);
 
 insert into review values(1, "Great game!", 5, "2023-04-15", 1, 1);
+insert into review values(2, "Loved playing this game, its great to play multiple times and really makes you think", 5, "2022-06-25", 7, 14);
+insert into review values(3, "Didn't like this game it was too hard!", 2, "2022-12-1", 9, 11);
+insert into review values(4, "Good afternoon playing this game, it was a bit difficult for my children but we loved it!", 4, "2023-02-18", 12, 2);
+insert into review values(5, "Found this game a little repetitive and boaring", 2, "2022-08-23", 19, 3);
+insert into review values(6, "Fab game....Loved it!", 5, "2022-12-30", 17, 9);
+insert into review values(7, "The whole family loved this game, we had so much fun playing!", 5, "2023-02-17", 4, 6);
+insert into review values(8, "This game is rubbish!", 1, "2022-05-30", 20, 13);
+insert into review values(9, "Really good fun!", 5, "2023-02-19", 11, 15);
+insert into review values(110, "Good family game!", 4, "2022-09-4", 5, 8);
+
+update review set review_id = 10 where review_id = 110;
+
 
 insert into booking values(1, 1, 1, 1, 1);
