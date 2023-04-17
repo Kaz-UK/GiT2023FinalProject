@@ -187,6 +187,7 @@ insert into review values(8, "This game is rubbish!", 1, "2022-05-30", 20, 13);
 insert into review values(9, "Really good fun!", 5, "2023-02-19", 11, 15);
 insert into review values(110, "Good family game!", 4, "2022-09-4", 5, 8);
 
+-- typo in last review so updated it
 update review set review_id = 10 where review_id = 110;
 
 
