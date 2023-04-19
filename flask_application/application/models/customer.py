@@ -23,4 +23,4 @@ class Customer(db.Model):
     customer_password = db.Column(db.String(100), nullable=False)
     join_date = db.Column(db.String, nullable=False)
     bookings = db.relationship("Booking", back_populates="customers")
-    reviews = db.relationship("Reviews", back_populates="customers")
+    reviews = db.relationship("Review", back_populates="customers")

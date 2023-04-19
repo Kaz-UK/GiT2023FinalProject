@@ -4,7 +4,6 @@ from dataclasses import dataclass
 
 @dataclass
 class Booking(db.Model):
-
     booking_id: int
     stock_id: int
     session_id: int
@@ -19,4 +18,3 @@ class Booking(db.Model):
     stocks = db.relationship("Stock", back_populates="bookings")
     cafesessions = db.relationship("Cafesession", back_populates="bookings")
     customers = db.relationship("Customer", back_populates="bookings")
-    

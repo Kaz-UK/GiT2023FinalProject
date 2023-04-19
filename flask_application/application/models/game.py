@@ -13,7 +13,7 @@ class Game(db.Model):
     gameplay: str
     game_description: str
 
-    game_id = db.Column(db.Integer, primary_key=True, nullable=False)
+    game_id = db.Column(db.Integer, primary_key=True)
     game_name = db.Column(db.String, nullable=False)
     num_of_players = db.Column(db.Integer, nullable=False)
     min_age = db.Column(db.Integer, nullable=False)
