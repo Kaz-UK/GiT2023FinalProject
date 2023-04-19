@@ -18,8 +18,10 @@ class Game(db.Model):
     num_of_players = db.Column(db.Integer, nullable=False)
     min_age = db.Column(db.Integer, nullable=False)
     duration_of_play_time = db.Column(db.Integer, nullable=False)
-    gameplay = db.Column(db.String)
-    game_description = db.Column(db.String)
+    gameplay = db.Column(db.String(50), nullable=True)
+    game_description = db.Column(db.String(1000), nullable=True)
+
 
     stocks = db.relationship("Stock", back_populates="games")
+
     reviews = db.relationship("Review", back_populates="games")
