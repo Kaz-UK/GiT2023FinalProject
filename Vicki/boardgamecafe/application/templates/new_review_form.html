@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block body_content %}
+<div class='container-sm' style="width:50%">
+    <form method='POST' action=''>
+        <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
+        {{ form.csrf_token }}
+
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.review.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.review (class_="form-control", size =32)}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.stars.label(class_="form-label")}}</div>
+                <div class="col-md-10">{{ form.stars(class_="form-control", size =32)}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.review_date.label (class_="form-label")}}</div>
+                <div class="col-md-10">{{ form.review_date (class_="form-control", size =32) }}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.customer_id.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.customer_id(class_="form-control", size =32) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.game_id.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.game_id(class_="form-control", size =32) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.customer_list.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.customer_list}}</div>
+
+            </div>
+        </div>
+        <div class="row">
+                    <div class = "mb-3">
+                        <div class="col-md-2">{{ form.game_list.label (class_="form-label") }}</div>
+                        <div class="col-md-10">{{ form.game_list}}</div>
+
+                    </div>
+                </div>
+        <div class="row">
+                <div class = "mb-3">
+                    <div class="col-md-2">{{ form.submit(class_="btn btn-primary mb-3") }}</div>
+                </div>
+        </div>
+            {{ message }}
+
+
+    </form>
+</div>
+{% block footer_content %}
+{% endblock %}
+
+{% endblock %}

@@ -14,6 +14,14 @@ def get_all_customers():
     return db.session.query(Customer).all()
 
 
+# CUSTOMERS BY ID
+def get_customer_by_id(customer_id):
+    if customer_id > 0:
+        return db.session.query(Customer).filter_by(customer_id=customer_id).first()
+    else:
+        return None
+
+
 # ALL GAMES
 def get_all_games():
     return db.session.query(Game).all()
@@ -37,3 +45,26 @@ def get_all_cafesessions():
 # ALL STOCK
 def get_all_stock():
     return db.session.query(Stock).all()
+
+
+# GET GAME BY GAME NAME
+def get_game_by_name(game_name):
+    if len(game_name) > 0:
+        game = db.session.query(Game).filter_by(game_name=game_name).first()
+        return game
+    else:
+        return None
+
+
+# ADD NEW REVIEW
+def add_new_review(review):
+    db.session.add(review)
+    db.session.commit()
+
+
+# ADD NEW BOOKING
+def add_new_booking(booking):
+    db.session.add(booking)
+    db.session.commit()
+
+

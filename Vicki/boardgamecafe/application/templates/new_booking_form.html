@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block body_content %}
+<div class='container-sm' style="width:50%">
+    <form method='POST' action=''>
+        <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
+        {{ form.csrf_token }}
+
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.stock_id.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.stock_id (class_="form-control", size =32)}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.session_id.label(class_="form-label")}}</div>
+                <div class="col-md-10">{{ form.session_id(class_="form-control", size =32)}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.customer_id.label (class_="form-label")}}</div>
+                <div class="col-md-10">{{ form.customer_id (class_="form-control", size =32) }}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.number_of_tables.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.number_of_tables(class_="form-control", size =32) }}</div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.session_list.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.session_list}}</div>
+
+            </div>
+        </div>
+        <div class="row">
+                    <div class = "mb-3">
+                        <div class="col-md-2">{{ form.customer_list.label (class_="form-label") }}</div>
+                        <div class="col-md-10">{{ form.customer_list}}</div>
+
+                    </div>
+                </div>
+        <div class="row">
+                    <div class = "mb-3">
+                        <div class="col-md-2">{{ form.stock_list.label (class_="form-label") }}</div>
+                        <div class="col-md-10">{{ form.stock_list}}</div>
+
+                    </div>
+                </div>
+        <div class="row">
+                <div class = "mb-3">
+                    <div class="col-md-2">{{ form.submit(class_="btn btn-primary mb-3") }}</div>
+                </div>
+        </div>
+            {{ message }}
+
+
+    </form>
+</div>
+{% block footer_content %}
+{% endblock %}
+
+{% endblock %}
