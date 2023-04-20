@@ -36,3 +36,8 @@ def get_all_cafesessions():
 def get_all_stocks():
     return db.session.query(Stock).all()
 
+
+# Search game title (for nav bar search function)
+def get_search_game_name(name):
+    return db.session.query(Game).filter_by(game_name=name).first()
+

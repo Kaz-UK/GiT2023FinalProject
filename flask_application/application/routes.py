@@ -8,6 +8,7 @@ from application.models.stock import Stock
 
 from application import db
 from application import app, service
+from application.forms.game_search import SearchForm
 
 
 # Creates a homepage using the Jinja template
@@ -16,10 +17,28 @@ from application import app, service
 def show_home():
     return render_template('home.html', title="Welcome")
 
+
 # Creates an about us page using the Jinja template
 @app.route('/about')
 def show_about():
     return render_template('about.html', title="About Us")
+
+
+# Send information from navigation search bar
+@app.context_processor
+def layout():
+    form = SearchForm()
+    return dict(form=form)
+
+
+# Navigation bar search function
+@app.route('/search', methods=['POST'])
+def search():
+    form = SearchForm()
+    if form.validate_on_submit():
+        title_search = form.searched.data
+        result = service.get_search_game_name(title_search)
+        return render_template('search.html', searched=result, title='Search Results')
 
 
 # All customers
