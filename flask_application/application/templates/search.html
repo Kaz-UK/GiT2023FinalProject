@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+  <!-- Insert HTML local to this page -->
+
+
+  <br>
+  <br>
+  <h2>Search Results</h2>
+  <br>
+  <div class="card">
+  <div class="card-header">
+    {{ searched.game_name }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Gameplay: {{ searched.gameplay }}</h5>
+    <p class="card-text">{{ searched.game_description }}</p>
+    <a href="#" class="btn btn-primary">Link to game</a>
+  </div>
+  </div>
+  <br>
+  <br>
+
+
+  <!-- Do not type below this line -->
+
+{% block footer_content %}
+{% endblock %}
+
+{% endblock %}

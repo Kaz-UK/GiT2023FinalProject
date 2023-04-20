@@ -23,7 +23,7 @@
     <!-- Start navigation bar -->
        <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-            <!-- Start navigation -->
+            <!-- Start navigation logo -->
             <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Board game cafe" width="30" height="24">
             <!-- End navigation logo -->
             <a class="navbar-brand" href="{{ url_for('show_home') }}">Board Game Cafe</a>
@@ -45,8 +45,9 @@
                 </li>
             </ul>
             <!-- Start navigation search bar -->
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Game Search" aria-label="Search">
+            <form method="POST" action="{{ url_for('search') }}" class="d-flex" role="search">
+                {{ form.hidden_tag() }}
+                <input class="form-control me-2" type="search" placeholder="Game Search" aria-label="Search", name="searched">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <!-- End navigation search bar -->
@@ -55,20 +56,22 @@
         </nav>
     <!-- End navigation bar -->
 
-    <div class="container-fluid">
+    <!-- Creates a fluid container for all webpages in the project -->
+    <div class="container-fluid p-2">
 
     <!-- Start responsive banner image -->
-
     <img src="{{ url_for('static', filename='images/banner.jpg') }}" class="img-fluid" alt="Game image">
-
     <!-- End responsive banner image -->
 
     {% block body_content %}
 
-    <!-- Links to content created on individual pages -->
+
+    <!-- The content of our projects HTML pages are placed here -->
 
 
     {% endblock %}
+
+    <!-- Ends the fluid container for all webpages in the project -->
     </div>
 
 
@@ -94,7 +97,7 @@
                 Sunday 11am - 10pm</p>
             </div>
             <div class="col">
-                <!-- Empty column -->
+                <!-- Empty column (left it here in case we need another column to work with) -->
            </div>
             <div class="me-3 p-2 col-lg-3">
                 <p align="right"><b>Follow us!</b></p>
