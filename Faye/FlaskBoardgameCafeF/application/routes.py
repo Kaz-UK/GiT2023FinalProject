@@ -7,8 +7,8 @@ from application.models.review import Review
 from application.models.stock import Stock
 
 from application import db
-from application import app, service
 
+from application import app, service
 
 # Creates a homepage using the Jinja template
 @app.route('/')
@@ -16,13 +16,7 @@ from application import app, service
 def show_home():
     return render_template('home.html', title="Welcome")
 
-# Creates an about us page using the Jinja template
-@app.route('/about')
-def show_about():
-    return render_template('about.html', title="About Us")
-
-
-# All customers
+# ALL CUSTOMER
 @app.route('/customers', methods=['GET'])
 def show_customers():
     error = ""
@@ -31,20 +25,16 @@ def show_customers():
         error = "There are no customers to display"
     #return render_template('customer.html', customers=customers, message=error, title="All Customer's Information")
     return jsonify(customers)
-
-
-# All games
+# ALL GAMES
 @app.route('/games', methods=['GET'])
 def show_games():
     error = ""
     games = service.get_all_games()
     if len(games) == 0:
         error = "There are no games to display"
-    #return render_template('customer.html', customers=customers, message=error, title="All Games")
+    #return render_template('games.html', customers=customers, message=error, title="All Games")
     return jsonify(games)
-
-
-# All reviews
+# ALL REVIEWS
 @app.route('/reviews', methods=['GET'])
 def show_reviews():
     error = ""
@@ -55,32 +45,42 @@ def show_reviews():
     return jsonify(reviews)
 
 
-# All bookings
+# ALL Bookings
 @app.route('/bookings', methods=['GET'])
 def show_bookings():
     error = ""
     bookings = service.get_all_bookings()
     if len(bookings) == 0:
         error = "There are no bookings to display"
-    #return render_template('customer.html', bookings=bookings, message=error, title="All Bookings")
+    #return render_template('customer.html', bookings=bookings, message=error, title="All Reviews")
     return jsonify(bookings)
 
-# All cafesessions
+# ALL CAFESESSIONS
 @app.route('/cafesessions', methods=['GET'])
 def show_cafesessions():
     error = ""
     cafesessions = service.get_all_cafesessions()
     if len(cafesessions) == 0:
         error = "There are no cafesessions to display"
-    #return render_template('customer.html', cafesessions=cafesessions, message=error, title="All Sessions")
+    #return render_template('customer.html', cafesessions=cafesessions, message=error, title="All Reviews")
     return jsonify(cafesessions)
 
-# All stock
+# ALL STOCK
 @app.route('/stock', methods=['GET'])
 def show_stock():
     error = ""
     stock = service.get_all_stock()
     if len(stock) == 0:
         error = "There is no stock to display"
-    #return render_template('customer.html', stock=stock, message=error, title="All Stocks")
+    #return render_template('customer.html', stock=stock, message=error, title="All Reviews")
     return jsonify(stock)
+
+
+@app.route('/games/<game_name>', methods=['GET'])
+def show_game_details(game_name):
+    error = ""
+    game = service.get_game_by_name(game_name)
+    if not game:
+        error = "There is no game called " + game_name
+    return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
+    # return jsonify(game)
