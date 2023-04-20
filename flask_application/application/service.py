@@ -38,6 +38,13 @@ def get_all_stocks():
 
 
 # Search game title (for nav bar search function)
-def get_search_game_name(name):
-    return db.session.query(Game).filter_by(game_name=name).first()
+# def get_search_game_name(name):
+#     return db.session.query(Game).filter_by(game_name=name).first()
 
+# GAME BY NAME (Faye)
+def get_game_by_name(game_name):
+    if len(game_name) > 0:
+        game = db.session.query(Game).filter_by(game_name=game_name).first()
+        return game
+    else:
+        return None

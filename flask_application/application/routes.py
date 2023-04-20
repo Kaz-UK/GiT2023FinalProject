@@ -103,3 +103,12 @@ def show_stock():
         error = "There is no stock to display"
     #return render_template('customer.html', stock=stock, message=error, title="All Stocks")
     return jsonify(stock)
+
+@app.route('/games/<game_name>', methods=['GET'])
+def show_game_details(game_name):
+    error = ""
+    game = service.get_game_by_name(game_name)
+    if not game:
+        error = "There is no game called " + game_name
+    return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
+    # return jsonify(game)
