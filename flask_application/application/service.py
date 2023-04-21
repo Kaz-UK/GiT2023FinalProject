@@ -48,4 +48,4 @@ def get_game_by_name(game_name):
         game = db.session.query(Game).filter_by(game_name=game_name).first()
         return game
     else:
-        return "There are no games with that name"
+        return None
