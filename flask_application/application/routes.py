@@ -110,5 +110,5 @@ def show_game_details(game_name):
     game = service.get_game_by_name(game_name)
     if not game:
         error = "There is no game called " + game_name
-    return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
+    return render_template('game.html', game=game, message=error, game_name=game_name, game_id=str(game.game_id), title=game.game_name)
     # return jsonify(game)
