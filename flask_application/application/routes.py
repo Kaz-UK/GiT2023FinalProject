@@ -24,7 +24,7 @@ def show_about():
     return render_template('about.html', title="About Us")
 
 
-# Send information from navigation search bar
+# Send information from navigation search bar (from all HTML pages)
 @app.context_processor
 def layout():
     form = SearchForm()
@@ -84,6 +84,7 @@ def show_bookings():
     #return render_template('customer.html', bookings=bookings, message=error, title="All Bookings")
     return jsonify(bookings)
 
+
 # All cafesessions
 @app.route('/cafesessions', methods=['GET'])
 def show_cafesessions():
@@ -93,6 +94,7 @@ def show_cafesessions():
         error = "There are no cafesessions to display"
     #return render_template('customer.html', cafesessions=cafesessions, message=error, title="All Sessions")
     return jsonify(cafesessions)
+
 
 # All stock
 @app.route('/stock', methods=['GET'])
@@ -104,6 +106,8 @@ def show_stock():
     #return render_template('customer.html', stock=stock, message=error, title="All Stocks")
     return jsonify(stock)
 
+
+# Individual games
 @app.route('/games/<game_name>', methods=['GET'])
 def show_game_details(game_name):
     error = ""

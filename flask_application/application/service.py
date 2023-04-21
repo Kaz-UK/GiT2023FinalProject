@@ -41,10 +41,11 @@ def get_all_stocks():
 # def get_search_game_name(name):
 #     return db.session.query(Game).filter_by(game_name=name).first()
 
-# GAME BY NAME (Faye)
+
+# Game by name (used by individual games page and the navigation search bar)
 def get_game_by_name(game_name):
     if len(game_name) > 0:
         game = db.session.query(Game).filter_by(game_name=game_name).first()
         return game
     else:
-        return None
+        return "There are no games with that name"
