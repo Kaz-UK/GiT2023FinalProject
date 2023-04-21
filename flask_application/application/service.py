@@ -49,3 +49,11 @@ def get_game_by_name(game_name):
         return game
     else:
         return None
+
+# GET CUSTOMER BY CUSTOMER ID
+def get_customer_by_customer_id(customer_id):
+    return db.session.query(Customer).filter_by(customer_id=customer_id).first()
+
+
+def get_reviews_by_game_id(game_id):
+    return db.session.query(Review).filter_by(game_id=game_id).order_by(Review.review_date.desc()).all()

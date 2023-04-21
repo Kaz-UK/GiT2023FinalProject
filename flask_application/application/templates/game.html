@@ -12,7 +12,7 @@
   </div>
   <div class="row p-2">
     <div class="col">
-      <img src="{{ url_for('static', filename='images/'+game_id+'.jpg')}}" alt="Game Image" height="350">
+      <img src="{{ url_for('static', filename='images/'+game_id+'.jpg')}}" alt="Game Image" height="300">
     </div>
   </div>
   <div class="row p-2">
@@ -40,7 +40,22 @@
   </div>
 </div>
 
-
+<div class="container text-left pb-5">
+  <div class="row">
+    <div class="col">
+      <h3>Reviews</h3>
+    </div>
+  </div>
+  {% for review in reviews_for_game %}
+  <div class="row">
+    <div class="col">
+      <i>{{first_names[loop.index0]}} &nbsp;
+      {{review.review_date}}</i> <br>
+      {{review.review}} <br> <br>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 
 
   <!-- Do not type below this line -->
