@@ -37,7 +37,7 @@ def search():
     form = SearchForm()
     if form.validate_on_submit():
         title_search = form.searched.data
-        result = service.get_search_game_name(title_search)
+        result = service.get_game_by_name(title_search)
         return render_template('search.html', searched=result, title='Search Results')
 
 
