@@ -44,7 +44,7 @@ def search():
         return render_template('search.html', searched=result, title='Search Results')
 
 
-# ALL CUSTOMER
+# SEARCH ALL CUSTOMER-GENERAL QUERY-VICKI
 @app.route('/customers', methods=['GET'])
 def show_customers():
     error = ""
@@ -55,7 +55,7 @@ def show_customers():
     return jsonify(customers)
 
 
-# CUSTOMERS BY ID
+# SEARCH CUSTOMERS BY ID
 @app.route('/customers/<int:customer_id>', methods=['GET'])
 def show_customer(customer_id):
     error = ""
@@ -68,7 +68,7 @@ def show_customer(customer_id):
     #return render_template('customer.html', customer=customer, customer_id=customer_id, message=error, title="Customer Information")
 
 
-# ALL GAMES
+# SEARCH ALL GAMES-GENERAL QUERY-VICKI
 @app.route('/games', methods=['GET'])
 def show_games():
     error = ""
@@ -81,7 +81,7 @@ def show_games():
 
 
 
-# ALL REVIEWS
+# SEARCH ALL REVIEWS-GENERAL QUERY-VICKI
 @app.route('/reviews', methods=['GET'])
 def show_reviews():
     error = ""
@@ -92,7 +92,7 @@ def show_reviews():
     return jsonify(reviews)
 
 
-# ALL Bookings
+# SEARCH ALL BOOKINGS - GENERAL QUERY - VICKI
 @app.route('/bookings', methods=['GET'])
 def show_bookings():
     error = ""
@@ -103,7 +103,7 @@ def show_bookings():
     return jsonify(bookings)
 
 
-# ALL CAFESESSIONS
+# SEARCH ALL CAFESESSIONS - GENERAL QUERY - VICKI
 @app.route('/cafesessions', methods=['GET'])
 def show_cafesessions():
     error = ""
@@ -114,7 +114,7 @@ def show_cafesessions():
     return jsonify(cafesessions)
 
 
-# ALL STOCK
+# SEARCH ALL STOCK - GENERAL QUERY - VICKI
 @app.route('/stock', methods=['GET'])
 def show_stock():
     error = ""
@@ -125,7 +125,7 @@ def show_stock():
     return jsonify(stock)
 
 
-# GET GAME BY GAME NAME(USED IN REVIEW)
+# GET GAME BY GAME NAME
 @app.route('/games/<game_name>', methods=['GET'])
 def show_game_details(game_name):
     error = ""
@@ -136,7 +136,7 @@ def show_game_details(game_name):
     # return jsonify(game)
 
 
-# GET CUSTOMER ID FROM EMAIL(FOR REVIEW)
+# GET CUSTOMER ID FROM EMAIL - USED IN REVIEW FORM - VICKI
 @app.route('/customer/<email>', methods=['GET'])
 def show_customer_details(email):
     error = ""
@@ -148,8 +148,18 @@ def show_customer_details(email):
             return str(customer.customer_id)
 
 
+# GET GAME ID BY GAME NAME***
+@app.route('/game/<game_name>', methods=['GET'])
+def get_game_details(game_name):
+    error = ""
+    game = service.get_game_by_name(game_name)
+    if not game:
+        error = "There is no game called " + game_name
+    # return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
+    return jsonify(game.game_id)
 
-# ADD A NEW REVIEW
+
+# ADD A NEW REVIEW USING WTF FORMS - VICKI
 @app.route('/new_review', methods=['GET', 'POST'])
 def add_new_review():
     error = ""
@@ -177,31 +187,78 @@ def add_new_review():
     return render_template('new_review_form.html', form=form, message=error)
 
 
-# ADD NEW BOOKING
+# GET ALL CAFESESSION BY SESSION DATE AND SESSION TYPE - USED IN BOOKING WITH WTF FORMS - VICKI
+@app.route('/cafesession/<session_date>/<session_type>', methods=['GET'])
+def get_cafesession_by_date_and_type(session_date, session_type):
+    error = ""
+    cafesessions = service.get_cafesession_by_date_and_type(session_date, session_type)
+    if not cafesessions:
+        error = "There are no sessions to display"
+    else:
+        return jsonify(cafesessions)
+
+
+# ADD A NEW BOOKING USING WTF FORMS - VICKI
 @app.route('/new_booking', methods=['GET', 'POST'])
-def add_new_booking():
+def add_new_cafesession():
     error = ""
     form = BookingForm()
 
     if request.method == 'POST':
         form = BookingForm(request.form)
-        stock_id = form.stock_id.data
-        session_id = form.session_id.data
-        customer_id = form.customer_id.data
-        number_of_tables = form.number_of_tables.data
-        session = form.session_list.data
-        customer = form.customer_list.data
-        stock = form.stock_list.data
-        if len(customer_id) == 0:
-            error = "Please insert you customer ID"
+        game = form.game_list.data
+        session_date = form.session_date_list.data
+        session_type = form.session_list.data
+        customer = form.email.data
+
+        if not game:
+            error = "Please select a game"
         else:
-            booking = Booking(stock_id=stock_id, session_id=session_id,
-                        customer_id=customer_id, number_of_tables=number_of_tables)
-            service.add_new_booking(booking)
-            booking = service.get_all_bookings()
-            return render_template('booking.html', booking=booking, message=error, stock_id=stock_id, session_id=session_id,
-                        customer_id=customer_id, number_of_tables=number_of_tables)
+            # PULLS IN GAME ID FROM GAMES LIST
+            g = service.show_game_details(game)
+            # PULLS IN CUSTOMER ID FROM EMAIL
+            cust = show_customer_details(customer)
+            # PULLS IN SESSION ID
+            session = get_cafesession_by_date_and_type(session_date, session_type)
+            # ADDS THE BOOKING
+            booking = Booking(stock_id=g.game_id, session_id=session.session_id, customer_id=cust)
+            return render_template('new_booking.html', stock_id=g.game_id, session_id=session.session_id, customer_id=cust, message=error )
 
     return render_template('new_booking_form.html', form=form, message=error)
 
 
+<<<<<<< HEAD
+
+
+# ADD NEW BOOKING
+# @app.route('/new_booking', methods=['GET', 'POST'])
+# def add_new_booking():
+#     error = ""
+#     form = BookingForm()
+#
+#     if request.method == 'POST':
+#         form = BookingForm(request.form)
+#         stock_id = form.stock_id.data
+#         session_id = form.session_id.data
+#         customer_id = form.customer_id.data
+#         number_of_tables = form.number_of_tables.data
+#         session = form.session_list.data
+#         customer = form.customer_list.data
+#         stock = form.stock_list.data
+#         if len(customer_id) == 0:
+#             error = "Please insert you customer ID"
+#         else:
+#             booking = Booking(stock_id=stock_id, session_id=session_id,
+#                         customer_id=customer_id, number_of_tables=number_of_tables)
+#             service.add_new_booking(booking)
+#             booking = service.get_all_bookings()
+#             return render_template('booking.html', booking=booking, message=error, stock_id=stock_id, session_id=session_id,
+#                         customer_id=customer_id, number_of_tables=number_of_tables)
+#
+#     return render_template('new_booking_form.html', form=form, message=error)
+#
+
+
+
+=======
+>>>>>>> 062015807ffbd39afa64f574223b038b95f7a97b

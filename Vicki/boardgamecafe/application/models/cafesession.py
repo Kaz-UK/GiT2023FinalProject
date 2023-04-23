@@ -1,6 +1,6 @@
 from application import db
 from dataclasses import dataclass
-
+import datetime
 @dataclass
 class Cafesession(db.Model):
 
