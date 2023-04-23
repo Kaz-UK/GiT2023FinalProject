@@ -189,3 +189,26 @@ insert into review values(10, "Good family game!", 4, "2022-09-4", 5, 8);
 insert into booking values(1, 1, 1, 1, 1);
 
 -- new reviews to add (23rd April)
+insert into review values(13, "Love this game!", 5, "2023-04-20", 1, 1);
+insert into review values(14, "Really enjoyed this game!", 4, "2023-04-20", 1, 5);
+insert into review values(15, "Really enjoyed this game! A great way to spend time with friends!", 5, "2023-04-20", 6, 9);
+insert into review values(16, "This game is fantastic! So much fun!", 4, "2023-04-22", 10, 1);
+insert into review values(17, "Love this game, best ever!", 5, "2023-04-22", 2, 1);
+insert into review values(18, "Didn't enjoy this one...", 2, "2023-04-22", 9, 5);
+insert into review values(19, "Good game", 3, "2023-04-23", 1, 1);
+insert into review values(20, "Fantastic game, really enjoyed playing it", 4, "2023-04-23", 12, 13);
+insert into review values(21, "This is the best game ever!", 5, "2023-04-23", 19, 18);
+insert into review values(22, "I'd recommend this game", 3, "2023-04-23", 19, 15);
+insert into review values(23, "Best game I've played in years!!", 5, "2023-04-23", 12, 16);
+insert into review values(24, "My favourite game at this cafe.", 5, "2023-04-23", 12, 6);
+insert into review values(25, "Good game, but not my favourite", 3, "2023-04-23", 12, 17);
+insert into review values(26, "Love playing this game as a family, great way to spend time together", 4, "2023-04-23", 13, 10);
+insert into review values(27, "Love playing this game with friends, evening well spent!", 4, "2023-04-23", 13, 18);
+insert into review values(28, "Love it so much we played it twice!", 4, "2023-04-23", 3, 1);
+insert into review values(29, "Bit boring... but the kids enjoyed it!", 2, "2023-04-23", 6, 16);
+insert into review values(30, "Great family game!", 4, "2023-04-23", 6, 11);
+insert into review values(31, "Love playing this game as a family, great way to spend time together", 5, "2023-04-23", 13, 12);
+insert into review values(32, "Fun game, a bit long...", 3, "2023-04-23", 6, 1);
+insert into review values(33, "My kids had a lot of fun playing this.", 4, "2023-04-23", 16, 17);
+insert into review values(34, "Great family game and great place to visit!", 4, "2023-04-23", 13, 14);
+insert into review values(35, "Interesting game and the staff we great at helping us figure out the instructions!", 4, "2023-04-23", 14, 18);
