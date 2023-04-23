@@ -39,23 +39,56 @@
     </div>
   </div>
 </div>
-
+<br>
 <div class="container text-left pb-5">
   <div class="row">
     <div class="col">
-      <h3>Reviews</h3>
+      <h3>Reviews &nbsp<a href="http://127.0.0.1:5000/new_review"><button type="button" class="btn btn-outline-primary">Review one of our games!</button></a></h3>
     </div>
   </div>
   {% for review in reviews_for_game %}
   <div class="row">
     <div class="col">
-      <i>{{first_names[loop.index0]}} &nbsp;
+      <i>{{first_names[loop.index0]}} <br>
+     {% if review.stars == 1 %}
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      {% elif review.stars == 2 %}
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      {% elif review.stars == 3 %}
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      {% elif review.stars == 4 %}
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star"></span>
+      {% else %}
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      {% endif %}<br>
       {{review.review_date}}</i> <br>
       {{review.review}} <br> <br>
     </div>
   </div>
   {% endfor %}
+
 </div>
+
 
 
   <!-- Do not type below this line -->
