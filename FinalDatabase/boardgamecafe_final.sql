@@ -187,3 +187,5 @@ insert into review values(9, "Really good fun!", 5, "2023-02-19", 11, 15);
 insert into review values(10, "Good family game!", 4, "2022-09-4", 5, 8);
 
 insert into booking values(1, 1, 1, 1, 1);
+
+-- new reviews to add (23rd April)
