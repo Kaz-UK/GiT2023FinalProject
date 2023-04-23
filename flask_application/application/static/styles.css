@@ -1,0 +1,67 @@
+/* CSS files for Sky Get into Tech Final Project (Board Game Cafe) */
+
+/* ---- DEFAULT SETTINGS ---- */
+
+/* Default website font */
+* {
+    font-family: 'Cabin', sans-serif;
+    }
+
+/* Default colour */
+
+body {
+    background-color: white;
+    }
+
+/* ---- BOOTSTRAP SETTINGS ---- */
+
+/* Bootstrap colour control */
+
+.bg-body-tertiary {
+    background-color: #CADAFF!important;
+    }
+
+/* Bootstrap buttons */
+.btn {
+    font-family: 'DynaPuff', cursive, sans-serif;
+    background-color: #CADAFF!important;
+    color: black!important;
+    border-color: #FFFFFF!important;
+    }
+
+/* ---- NAVBAR SETTINGS ---- */
+
+/* Navbar cafe name font */
+.navbar-brand {
+    font-family: 'DynaPuff', cursive, sans-serif;
+    }
+
+/* Navbar menu font */
+.nav-link, .form-control {
+    font-family: 'DynaPuff', cursive, sans-serif;
+    }
+
+/* ---- FOOTER SETTINGS ---- */
+
+/* Footer font */
+.footer_text {
+    font-size: 95%;
+    }
+
+.footer_header {
+    font-family: 'DynaPuff', cursive, sans-serif;
+    }
+
+/* ---- IMAGE SETTINGS ---- */
+
+/* Padding around logo and media icons */
+.social_icon {
+    padding-left: 10px;
+    }
+
+/* Aligns Google Font's material icon to text */
+.material-icons {
+    font-size: inherit;
+    line-height: inherit;
+    vertical-align: bottom;
+    }

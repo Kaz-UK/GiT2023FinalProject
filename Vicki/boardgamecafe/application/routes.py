@@ -205,5 +205,3 @@ def add_new_booking():
     return render_template('new_booking_form.html', form=form, message=error)
 
 
-
-

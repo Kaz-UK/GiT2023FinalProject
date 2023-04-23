@@ -1,17 +1,122 @@
 {% extends "layout.html" %}
 {% block body_content %}
 
-  <!-- Insert HTML local to this page -->
+    <!-- Insert HTML local to this page -->
 
-<h2>About Us</h2>
+    <!-- Button layout -->
+    <div class="container text-center">
+        <div class="row">
+        <div class="col">
+            <!-- Start Booking FAQ modal -->
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Booking FAQs
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Booking FAQs</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" align="left">
+                    <p><b>Can I stay for longer than the session I've booked</b></p>
+                    <p>Your booking guarantees your table for the duration of your selected session. If on the day you would like to extend your session, please let our friendly staff know and we can try to accommodate your request if we have available space.</p>
+                    <p><b>I want to book a table, but I don't know what game to play</b></p>
+                    <p>We have a wide selection of games, and our staff are always happy to make suggestions.</p>
+                    <p><b>I've booked a session, but I can no longer come</b></p>
+                    <p>Please contact us on insert phone number to cancel your session.</p>
+                    <p><b>I haven't booked, can I come along to a session?</b></p>
+                    <p>We always recommend booking, but we welcome walk-ins where availability allows.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    <!-- End Booking FAQ modal -->
+        </div>
+        <div class="col">
+    <!-- Start Privacy modal -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#PrivacyModal">
+        Privacy Policy
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="PrivacyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="PrivacyModal">Privacy Policy</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" align="left">
+                <p>Further details coming soon</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- End Privacy modal -->
 
-<p>What do we want to say here?</p>
+        </div>
+        <div class="col">
 
+    <!-- Start Contact Us modal -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ContactModal">
+        Contact Us
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="ContactModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ContactModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="ContactModal">Contact Us</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" align="left">
+                <p><b>Phone us</b></p>
+                <p>0452-494-5745</p>
+                <p><b>Email us</b></p>
+                <p>contact@ourboardgamecafe.co.uk</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- End Contact Us modal -->
 
+        </div>
+        </div>
+    </div>
+    <!-- End button layout -->
 
+    <!-- Start general about us text -->
+    <br>
+    <h2>About Us</h2>
+        <p>Opened in 2009, our boardgame cafe has become the home to boardgames in INSERT CITY.
+        We offer a friendly and welcoming space for gamers young and old, with access to a large collection of boardgames.</p>
+        <br>
+    <h4>Opening Times</h4>
+        <p>We are open daily from 11am - 10pm</p>
+        <br>
+    <h4>Game Library</h4>
+        <p>We have a wide selection of games to choose from. Why not browse some of our titles online, or pop in to look through our game library.</p>
+        <br>
+    <h4>Cafe</h4>
+        <p>We are proud to support local producers and suppliers. Our cafe offers a range of freshly baked cakes and sandwiches between 11am-3pm, and from 5pm we offer snack food until 9pm.</p>
+        <p>We are fully licenced, and have a range of local craft beers on tap.</p>
+        <br>
+    <!-- End general about us text -->
 
-
-  <!-- Do not type below this line -->
+    <!-- Do not type below this line -->
 
 {% block footer_content %}
 {% endblock %}
