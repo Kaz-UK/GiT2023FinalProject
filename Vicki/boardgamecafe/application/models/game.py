@@ -21,7 +21,6 @@ class Game(db.Model):
     gameplay = db.Column(db.String(50), nullable=True)
     game_description = db.Column(db.String(1000), nullable=True)
 
-
     stocks = db.relationship("Stock", back_populates="games")
 
     reviews = db.relationship("Review", back_populates="games")

@@ -1,3 +1,5 @@
+from flask import flash
+
 import application.models.review
 from application.models.booking import Booking
 from application.models.cafesession import Cafesession
@@ -5,7 +7,7 @@ from application.models.customer import Customer
 from application.models.game import Game
 from application.models.review import Review
 from application.models.stock import Stock
-
+import datetime
 from application import db
 
 
@@ -25,6 +27,8 @@ def get_customer_by_id(customer_id):
 # ALL GAMES
 def get_all_games():
     return db.session.query(Game).all()
+
+
 
 
 # ALL Reviews
@@ -56,6 +60,20 @@ def get_game_by_name(game_name):
         return None
 
 
+# GET GAME ID FROM GAME NAME
+def show_game_details(game_name):
+    if not game_name:
+        game = db.session.query(Game).filter_by(game_name=game_name).first()
+        return game
+    else:
+        return None
+
+
+# GET CUSTOMER ID FROM EMAIL
+def get_customer_by_email(email):
+    return db.session.query(Customer).filter_by(email=email).first()
+
+
 # ADD NEW REVIEW
 def add_new_review(review):
     db.session.add(review)
@@ -68,3 +86,11 @@ def add_new_booking(booking):
     db.session.commit()
 
 
+# GET CUSTOMER BY CUSTOMER ID
+def get_customer_by_customer_id(customer_id):
+    return db.session.query(Customer).filter_by(customer_id=customer_id).first()
+
+
+# GET REVIEW BY GAME ID
+def get_reviews_by_game_id(game_id):
+    return db.session.query(Review).filter_by(game_id=game_id).order_by(Review.review_date.desc()).all()

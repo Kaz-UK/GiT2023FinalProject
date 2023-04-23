@@ -4,39 +4,58 @@
   <!-- Insert HTML local to this page -->
 
 
-<div class="container text-center">
-   <div class="row">
+<div class="container text-center p-3">
+   <div class="row p-2">
     <div class="col">
-      Game name
+      <h3>{{game.game_name}}</h3>
     </div>
   </div>
-  <div class="row">
+  <div class="row p-2">
     <div class="col">
-      picture of game
+      <img src="{{ url_for('static', filename='images/'+game_id+'.jpg')}}" alt="Game Image" height="300">
     </div>
   </div>
-  <div class="row">
+  <div class="row p-2">
     <div class="col">
-      Max num of players:
+      {% if game.num_of_players > 2 %}
+      Number of players: 2 - {{game.num_of_players}}
+      {% else %}
+      Number of players: 2
+      {% endif %}
     </div>
     <div class="col">
-      Min age:
+      Age: {{game.min_age}}+
     </div>
     <div class="col">
-      Duration:
+      Duration: {{game.duration_of_play_time}} minutes
     </div>
     <div class="col">
-      Play:
+      Play: {{game.gameplay}}
     </div>
   </div>
-  <div class="row">
+  <div class="row p-2">
     <div class="col">
-      description
+      {{game.game_description}}
     </div>
   </div>
 </div>
 
-
+<div class="container text-left pb-5">
+  <div class="row">
+    <div class="col">
+      <h3>Reviews</h3>
+    </div>
+  </div>
+  {% for review in reviews_for_game %}
+  <div class="row">
+    <div class="col">
+      <i>{{first_names[loop.index0]}} &nbsp;
+      {{review.review_date}}</i> <br>
+      {{review.review}} <br> <br>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 
 
   <!-- Do not type below this line -->
