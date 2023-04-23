@@ -1,0 +1,237 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+ <!-- Insert HTML local to this page -->
+
+<!-- trying basic content for games -->
+
+<body>
+
+<h2> Our games games 4</h2>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[0].game_id|string + '.jpg') }}" width="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[0].game_name}}</h5>
+    <p class="card-text">{{games[0].num_of_players}} players</p>
+    <a href="{{url_for('static', filename='images/' + games[0].game_name + '.jpg') }}" class="btn btn-primary">Click for more</a>
+  </div>
+
+</div>
+    </div>
+
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[1].game_id|string + '.jpg') }}" width="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[1].game_name}}</h5>
+    <p class="card-text">{{games[1].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+
+</div>
+    </div>
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[2].game_id|string + '.jpg') }}" width="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[2].game_name}}</h5>
+    <p class="card-text">{{games[2].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+{# !-- end of code for whole row. beginning of row 2--!#}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[3].game_id|string + '.jpg') }}" height="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[3].game_name}}</h5>
+    <p class="card-text">{{games[3].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+
+</div>
+    </div>
+
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[4].game_id|string + '.jpg') }}" height="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[4].game_name}}</h5>
+    <p class="card-text">{{games[4].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+
+</div>
+    </div>
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[5].game_id|string + '.jpg') }}" height="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[5].game_name}}</h5>
+    <p class="card-text">{{games[5].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+{# end of code for row 2. beginning of row 3 #}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[6].game_id|string + '.jpg') }}" height="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[6].game_name}}</h5>
+    <p class="card-text">{{games[6].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+
+</div>
+    </div>
+
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[7].game_id|string + '.jpg') }}" height="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[7].game_name}}</h5>
+    <p class="card-text">{{games[7].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+
+</div>
+    </div>
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[8].game_id|string + '.jpg') }}" height="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[8].game_name}}</h5>
+    <p class="card-text">{{games[8].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+{# end of row 3. beginning of row 4 #}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[9].game_id|string + '.jpg') }}" height="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[9].game_name}}</h5>
+    <p class="card-text">{{games[9].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+
+</div>
+    </div>
+
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[10].game_id|string + '.jpg') }}" height="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[10].game_name}}</h5>
+    <p class="card-text">{{games[10].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+
+</div>
+    </div>
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[11].game_id|string + '.jpg') }}" height="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[11].game_name}}</h5>
+    <p class="card-text">{{games[11].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+{# end of 4th row. beginning of row 5 #}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[12].game_id|string + '.jpg') }}" height="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[12].game_name}}</h5>
+    <p class="card-text">{{games[12].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+
+</div>
+    </div>
+
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[13].game_id|string + '.jpg') }}" height="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[13].game_name}}</h5>
+    <p class="card-text">{{games[13].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+
+</div>
+    </div>
+    <div class="col-sm">
+      <div class="card text-center" style="width: 18rem;">
+  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[14].game_id|string + '.jpg') }}" height="100" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{games[14].game_name}}</h5>
+    <p class="card-text">{{games[14].num_of_players}} players</p>
+    <a href="#" class="btn btn-primary">Click for more</a>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+
+{# <-- code for 1 rendering one card --> #}
+
+
+    {#{% for game in games %}#}
+
+<!--<div class="card text-center" style="width: 18rem;">-->
+<!--  <img class="card-img-top" src="{{ url_for('static', filename='images/' + games[7].game_id|string + '.jpg') }}" height="100" alt="Card image cap">-->
+<!--  <div class="card-body">-->
+<!--    <h5 class="card-title">{{games[7].game_name}}</h5>-->
+<!--    <p class="card-text">{{games[7].num_of_players}} players</p>-->
+<!--    <a href="#" class="btn btn-primary">Click for more</a>-->
+<!--  </div>-->
+<!--    {#{% endfor %}#}-->
+
+<!--    {{ message }}-->
+<!--</div>-->
+
+
+</body>
+
+  <!-- Do not type below this line -->
+
+{% block footer_content %}
+{% endblock %}
+
+{% endblock %}
+

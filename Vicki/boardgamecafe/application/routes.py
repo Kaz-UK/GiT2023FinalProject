@@ -227,6 +227,7 @@ def add_new_cafesession():
     return render_template('new_booking_form.html', form=form, message=error)
 
 
+<<<<<<< HEAD
 
 
 # ADD NEW BOOKING
@@ -259,3 +260,5 @@ def add_new_cafesession():
 
 
 
+=======
+>>>>>>> 062015807ffbd39afa64f574223b038b95f7a97b

@@ -127,6 +127,9 @@ The card deck consists of five different colours of cards, numbered 1–5 in eac
 An extra suit of cards, rainbow coloured, is also provided for advanced or variant play.
 ");
 insert into game values(15, "Forbidden Island", 4, 10, 30, "co-operative", "Dare to discover Forbidden Island! Join a team of fearless adventurers on a do-or-die mission to capture four sacred treasures from the ruins of this perilous paradise. Your team will have to work together and make some pulse-pounding manoeuvres, as the island will sink beneath every step! Race to collect the treasures and make a triumphant escape before you are swallowed into the watery abyss!");
+insert into game values(16, "Pokemon Monopoly", 6, 8, 180, "competitive", "Partner with Pikachu and friends in Pokemon Monopoly! Travel through eight gyms and battle all kinds of Pokemon in the Pokemon Kanto Edition of Monopoly. Choose your favourite token from; Pikachu, Bulbasaur, Squirtle, Charmander, Eevee and Jigglypuff, adventure to all eight gyms and battle your way to victory; accumulate fortunes, but watch out for taxes, jail and bankruptcy");
+insert into game values(17, "Roblox Monopoly", 6, 8, 180, "competitive", "In Monopoly: Roblox players buy, sell, and trade some of their favorite Roblox experiences including Adopt Me!, Welcome to Bloxburg, Royale High, and more! Featuring artwork, themes, and elements inspired by the popular online platform, players move around the board buying as many Dev Home Offices and Dev Studio Offices as they can. ");
+insert into game values(18, "The Lost Expedition", 5, 10, 50, "co-operative", "Legendary explorer Percy Fawcett marched deep into the Amazon in search of El Dorado. He was never seen again. Your team has gone in search of him, but now you hope to escape the jungle with the greatest treasure of all: your life. Make the best of your food, your ammunition, and your health in The Lost Expedition as you plunge deep into the jungle. Choose your path carefully to ensure you're ready for the pitfalls that may occur. Play solo or cooperatively to survive the expedition, or play in teams to see which group can escape the jungle first.");
 
 insert into cafesession values(1, "Lunchtime", "2023-04-30", 19);
 insert into cafesession values(2, "Afternoon", "2023-04-30", 20);
@@ -184,3 +187,28 @@ insert into review values(9, "Really good fun!", 5, "2023-02-19", 11, 15);
 insert into review values(10, "Good family game!", 4, "2022-09-4", 5, 8);
 
 insert into booking values(1, 1, 1, 1, 1);
+
+-- new reviews to add (23rd April)
+insert into review values(13, "Love this game!", 5, "2023-04-20", 1, 1);
+insert into review values(14, "Really enjoyed this game!", 4, "2023-04-20", 1, 5);
+insert into review values(15, "Really enjoyed this game! A great way to spend time with friends!", 5, "2023-04-20", 6, 9);
+insert into review values(16, "This game is fantastic! So much fun!", 4, "2023-04-22", 10, 1);
+insert into review values(17, "Love this game, best ever!", 5, "2023-04-22", 2, 1);
+insert into review values(18, "Didn't enjoy this one...", 2, "2023-04-22", 9, 5);
+insert into review values(19, "Good game", 3, "2023-04-23", 1, 1);
+insert into review values(20, "Fantastic game, really enjoyed playing it", 4, "2023-04-23", 12, 13);
+insert into review values(21, "This is the best game ever!", 5, "2023-04-23", 19, 18);
+insert into review values(22, "I'd recommend this game", 3, "2023-04-23", 19, 15);
+insert into review values(23, "Best game I've played in years!!", 5, "2023-04-23", 12, 16);
+insert into review values(24, "My favourite game at this cafe.", 5, "2023-04-23", 12, 6);
+insert into review values(25, "Good game, but not my favourite", 3, "2023-04-23", 12, 17);
+insert into review values(26, "Love playing this game as a family, great way to spend time together", 4, "2023-04-23", 13, 10);
+insert into review values(27, "Love playing this game with friends, evening well spent!", 4, "2023-04-23", 13, 18);
+insert into review values(28, "Love it so much we played it twice!", 4, "2023-04-23", 3, 1);
+insert into review values(29, "Bit boring... but the kids enjoyed it!", 2, "2023-04-23", 6, 16);
+insert into review values(30, "Great family game!", 4, "2023-04-23", 6, 11);
+insert into review values(31, "Love playing this game as a family, great way to spend time together", 5, "2023-04-23", 13, 12);
+insert into review values(32, "Fun game, a bit long...", 3, "2023-04-23", 6, 1);
+insert into review values(33, "My kids had a lot of fun playing this.", 4, "2023-04-23", 16, 17);
+insert into review values(34, "Great family game and great place to visit!", 4, "2023-04-23", 13, 14);
+insert into review values(35, "Interesting game and the staff we great at helping us figure out the instructions!", 4, "2023-04-23", 14, 18);
