@@ -95,8 +95,8 @@ def show_games():
     games = service.get_all_games()
     if len(games) == 0:
         error = "There are no games to display"
-    # return render_template('games.html', game=games, message=error, title="All Games")
-    return jsonify(games)
+    return render_template('games.html', games=games, message=error, title="All Games", len=len(games))
+    # return jsonify(games)
 
 
 # SEARCH ALL REVIEWS-GENERAL QUERY-VICKI*
