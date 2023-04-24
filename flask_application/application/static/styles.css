@@ -78,3 +78,13 @@ body {
     line-height: inherit;
     vertical-align: bottom;
     }
+
+/* This is for the stars on the review page */
+.checked {
+color: orange
+}
+
+/* Bootstrap image-fluid */
+.img-fluid {
+    width: 100%
+    }
