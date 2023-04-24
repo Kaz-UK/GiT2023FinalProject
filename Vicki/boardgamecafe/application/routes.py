@@ -1,50 +1,70 @@
 from flask import render_template, jsonify, request
+
 from application.models.booking import Booking
 from application.models.cafesession import Cafesession
 from application.models.customer import Customer
 from application.models.game import Game
 from application.models.review import Review
 from application.models.stock import Stock
-from application.forms.ReviewForm import ReviewForm
-from application.forms.BookingForm import BookingForm
-import datetime
-from application.forms.game_search import SearchForm
-from application import db
 
+from application import db
 from application import app, service
 
+from application.forms.ReviewForm import ReviewForm
+from application.forms.BookingForm import BookingForm
+from application.forms.game_search import SearchForm
 
-# Creates a homepage using the Jinja template
+import datetime
+
+# Creates a homepage using the Jinja template*
 @app.route('/')
 @app.route('/home')
-def show_home():
+def home():
     return render_template('home.html', title="Welcome")
 
 
-# Creates an about us page using the Jinja template
+# Creates an about us page using the Jinja template*
 @app.route('/about')
-def show_about():
+def about():
     return render_template('about.html', title="About Us")
 
 
-# Send information from navigation search bar (from all HTML pages)
+# CREATES ERROR HANDLER (404 PAGE NOT FOUND)*
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html', title="Page Not Found")
+
+
+# CREATES ERROR HANDLER (405 METHOD NOT ALLOWED)
+@app.errorhandler(405)
+def invalid_token(e):
+    return render_template('405.html', title="Method Not Allowed")
+
+
+# Send information from navigation search bar (from all HTML pages)*
 @app.context_processor
 def layout():
     form = SearchForm()
     return dict(form=form)
 
 
-# Navigation bar search function
+# NAVIGATION BAR SEARCH FUNCTION (PRODUCES A LIST OF SEARCH RESULTS)*
 @app.route('/search', methods=['POST'])
 def search():
     form = SearchForm()
+    error = ""
     if form.validate_on_submit():
-        title_search = form.searched.data
-        result = service.get_game_by_name(title_search)
-        return render_template('search.html', searched=result, title='Search Results')
+        title_search = form.searched_game_name.data
+        results = service.get_searched_games(title_search)
+        if not results:
+            error = f"Sorry there are no games with the name '{title_search}'"
+    else:
+        results = ""
+        error = "There was an error with your request, did you enter a game name?"
+    return render_template('search.html', results=results, message=error, title='Search Results')
 
 
-# SEARCH ALL CUSTOMER-GENERAL QUERY-VICKI
+# SEARCH ALL CUSTOMER-GENERAL QUERY-VICKI*
 @app.route('/customers', methods=['GET'])
 def show_customers():
     error = ""
@@ -55,7 +75,7 @@ def show_customers():
     return jsonify(customers)
 
 
-# SEARCH CUSTOMERS BY ID
+# SEARCH CUSTOMERS BY ID*
 @app.route('/customers/<int:customer_id>', methods=['GET'])
 def show_customer(customer_id):
     error = ""
@@ -68,18 +88,18 @@ def show_customer(customer_id):
     #return render_template('customer.html', customer=customer, customer_id=customer_id, message=error, title="Customer Information")
 
 
-# SEARCH ALL GAMES-GENERAL QUERY-VICKI
+# ALL GAMES
 @app.route('/games', methods=['GET'])
 def show_games():
     error = ""
     games = service.get_all_games()
     if len(games) == 0:
         error = "There are no games to display"
-    #return render_template('customer.html', customers=customers, message=error, title="All Games")
+    # return render_template('games.html', game=games, message=error, title="All Games")
     return jsonify(games)
 
 
-# SEARCH ALL REVIEWS-GENERAL QUERY-VICKI
+# SEARCH ALL REVIEWS-GENERAL QUERY-VICKI*
 @app.route('/reviews', methods=['GET'])
 def show_reviews():
     error = ""
@@ -90,7 +110,7 @@ def show_reviews():
     return jsonify(reviews)
 
 
-# SEARCH ALL BOOKINGS - GENERAL QUERY - VICKI
+# SEARCH ALL BOOKINGS - GENERAL QUERY - VICKI*
 @app.route('/bookings', methods=['GET'])
 def show_bookings():
     error = ""
@@ -101,7 +121,7 @@ def show_bookings():
     return jsonify(bookings)
 
 
-# SEARCH ALL CAFESESSIONS - GENERAL QUERY - VICKI
+# SEARCH ALL CAFESESSIONS - GENERAL QUERY - VICKI*
 @app.route('/cafesessions', methods=['GET'])
 def show_cafesessions():
     error = ""
@@ -112,7 +132,7 @@ def show_cafesessions():
     return jsonify(cafesessions)
 
 
-# SEARCH ALL STOCK - GENERAL QUERY - VICKI
+# SEARCH ALL STOCK - GENERAL QUERY - VICKI*
 @app.route('/stock', methods=['GET'])
 def show_stock():
     error = ""
@@ -123,18 +143,20 @@ def show_stock():
     return jsonify(stock)
 
 
-# GET GAME BY GAME NAME
-@app.route('/games/<game_name>', methods=['GET'])
-def show_game_details(game_name):
-    error = ""
-    game = service.get_game_by_name(game_name)
-    if not game:
-        error = "There is no game called " + game_name
-    return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
-    # return jsonify(game)
+# GET GAME BY GAME NAME (USED IN REVIEW)
+# @app.route('/games/<game_name>', methods=['GET'])
+# def show_game_details(game_name):
+#     error = ""
+#     game = service.get_game_by_name(game_name)
+#     if not game:
+#         error = "There is no game called " + game_name
+#     return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
+#     # return jsonify(game)
 
 
-# GET CUSTOMER ID FROM EMAIL - USED IN REVIEW & BOOKING FORM - VICKI*****
+
+
+# GET CUSTOMER ID FROM EMAIL - USED IN REVIEW & BOOKING FORM - VICKI*
 @app.route('/customer/<email>', methods=['GET'])
 def show_customer_details(email):
     error = ""
@@ -147,17 +169,17 @@ def show_customer_details(email):
 
 
 # GET GAME ID BY GAME NAME - USED IN REVIEW & BOOKING FORM - VICKI
-@app.route('/game/<game_name>', methods=['GET'])
-def get_game_details(game_name):
+@app.route('/review_game/<game_name>', methods=['GET'])
+def display_game_details(game_name):
     error = ""
     game = service.get_game_by_name(game_name)
     if not game:
         error = "There is no game called " + game_name
-    # return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
-    return jsonify(game.game_id)
+    return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
+    # return jsonify(game.game_id)
 
 
-# ADD A NEW REVIEW USING WTF FORMS - VICKI
+# ADD A NEW REVIEW USING WTF FORMS - VICKI*
 @app.route('/new_review', methods=['GET', 'POST'])
 def add_new_review():
     error = ""
@@ -229,6 +251,21 @@ def add_new_booking():
 
 
 
+# INDIVIDUAL GAMES - FAYE
+@app.route('/games/<game_name>', methods=['GET'])
+def show_game_details(game_name):
+    error = ""
+    game = service.get_game_by_name(game_name)
+    reviews_for_game = service.get_reviews_by_game_id(game.game_id)
+    first_names = []
+    if not game:
+        error = "There is no game called " + game_name
+    else:
+        for rev in reviews_for_game:
+            customer = service.get_customer_by_customer_id(rev.customer_id)
+            first_names.append(customer.first_name)
+    return render_template('game.html', game=game, message=error, game_name=game_name, game_id=str(game.game_id),
+                            first_names=first_names, reviews_for_game=reviews_for_game, title=game.game_name)
 
 
 

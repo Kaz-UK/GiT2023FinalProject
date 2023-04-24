@@ -12,12 +12,12 @@ import datetime
 from application import db
 
 
-# ALL CUSTOMERS
+# ALL CUSTOMERS*
 def get_all_customers():
     return db.session.query(Customer).all()
 
 
-# CUSTOMERS BY ID
+# CUSTOMERS BY ID*
 def get_customer_by_id(customer_id):
     if customer_id > 0:
         return db.session.query(Customer).filter_by(customer_id=customer_id).first()
@@ -25,22 +25,22 @@ def get_customer_by_id(customer_id):
         return None
 
 
-# ALL GAMES
+# ALL GAMES*
 def get_all_games():
-    return db.session.query(Game).all()
+    return db.session.query(Game).order_by(Game.game_name).all()
 
 
-# ALL Reviews
+# ALL Reviews*
 def get_all_reviews():
     return db.session.query(Review).all()
 
 
-# ALL Bookings
+# ALL Bookings*
 def get_all_bookings():
     return db.session.query(Booking).all()
 
 
-# ALL CAFESESSIONS
+# ALL CAFESESSIONS*
 def get_all_cafesessions():
     return db.session.query(Cafesession).all()
 
@@ -50,13 +50,12 @@ def get_cafesession_by_date_and_type(session_date, session_type):
     return db.session.query(Cafesession).filter_by(session_date=session_date, session_type=session_type).first()
 
 
-
-# ALL STOCK
+# ALL STOCK*
 def get_all_stock():
     return db.session.query(Stock).all()
 
 
-# GET GAME BY GAME NAME
+# GET GAME BY GAME NAME (USED BY INDIVIDUAL GAMES PAGE)*
 def get_game_by_name(game_name):
     if len(game_name) > 0:
         game = db.session.query(Game).filter_by(game_name=game_name).first()
@@ -80,29 +79,29 @@ def show_game_details(game_name):
         return None
 
 
-# GET CUSTOMER ID FROM EMAIL
+# GET CUSTOMER ID FROM EMAIL*
 def get_customer_by_email(email):
     return db.session.query(Customer).filter_by(email=email).first()
 
 
-# ADD NEW REVIEW
+# ADD NEW REVIEW*
 def add_new_review(review):
     db.session.add(review)
     db.session.commit()
 
 
-# ADD NEW BOOKING
+# ADD NEW BOOKING*
 def add_new_booking(booking):
     db.session.add(booking)
     db.session.commit()
 
 
-# GET CUSTOMER BY CUSTOMER ID
+# GET CUSTOMER BY CUSTOMER ID*
 def get_customer_by_customer_id(customer_id):
     return db.session.query(Customer).filter_by(customer_id=customer_id).first()
 
 
-# GET REVIEW BY GAME ID
+# GET REVIEW BY GAME ID*
 def get_reviews_by_game_id(game_id):
     return db.session.query(Review).filter_by(game_id=game_id).order_by(Review.review_date.desc()).all()
 
@@ -122,3 +121,9 @@ def get_cafesession_by_type(session_type):
 # GET CAFESESSION BY SESSION ID
 def get_cafe_session_by_session_id(cafesession):
     return db.session.query(Cafesession).filter_by(cafesession=cafesession).order_by(func.max(Cafesession.session_id))
+
+
+# SEARCH GAME BY NAME (USED BY SEARCH NAVIGATION BAR)
+def get_searched_games(game_name):
+    search = "%{}%".format(game_name)
+    return db.session.query(Game).filter(Game.game_name.like(search)).all()

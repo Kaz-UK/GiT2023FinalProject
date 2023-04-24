@@ -1,18 +1,33 @@
-
 {% extends "layout.html" %}
 {% block body_content %}
 
   <!-- Insert HTML local to this page -->
 
-<h2> Welcome to our BoardgameCafe!</h2>
+    <h2> Welcome to our Boardgame Cafe!</h2>
 
-<p>We offer a warm and friendly environment to come to with your friends or family
-and enjoy playing a board game. Book onto one of our sessions and bring your own game
-or reserve one from our collection!</p>
+    <p>We offer a warm and friendly environment to come to with your friends or family and enjoy playing a board game.</p>
+    <p>Book onto one of our sessions and bring your own game or reserve one from our collection.</p>
 
-
-
-
+    <!-- Image layout -->
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <img src="{{ url_for('static', filename='images/dice_game.jpg') }}" class="rounded" alt="Generic image of a dice game. Photo by Sarah Pflug from Burst" height="150">
+                <br>
+                <br>
+            </div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='images/dice_game.jpg') }}" class="rounded" alt="Generic image of a dice game. Photo by Sarah Pflug from Burst" height="150">
+                <br>
+                <br>
+            </div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='images/dice_game.jpg') }}" class="rounded" alt="Generic image of a dice game. Photo by Sarah Pflug from Burst" height="150">
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
 
   <!-- Do not type below this line -->
 

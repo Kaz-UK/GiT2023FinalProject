@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}} - Board Game Cafe</title>
+    <title>{{title}} - Boardgame Cafe</title>
     <!-- Link to Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -13,20 +13,26 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
     <!-- Link to Google Fonts -->
-
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+    <!-- Link to Google Fonts Material Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Link to Font Awesome for review star icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Link to local CSS files -->
     <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
     <!-- Start navigation bar -->
-       <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-            <!-- Start navigation -->
-            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Board game cafe" width="30" height="24">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <!-- Start navigation logo -->
+            <!-- <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Board game cafe" width="30" height="24"> -->
             <!-- End navigation logo -->
-            <a class="navbar-brand" href="{{ url_for('show_home') }}">Board Game Cafe</a>
+            <a class="navbar-brand" href="{{ url_for('home') }}">Boardgame Cafe</a>
                 <!-- Start hamburger menu (only shows when screen is small) -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,72 +44,72 @@
                     <a class="nav-link" href="#">Booking</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Games</a>
+                    <a class="nav-link" href="{{ url_for('show_games') }}">Games</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('show_about') }}">About Us</a>
+                    <a class="nav-link" href="{{ url_for('about') }}">About Us</a>
                 </li>
             </ul>
             <!-- Start navigation search bar -->
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Game Search" aria-label="Search">
+            <form method="POST" action="{{ url_for('search') }}" class="d-flex" role="search">
+                {{ form.hidden_tag() }}
+                <input class="form-control me-2" type="search" placeholder="Game Search" aria-label="Search", name="searched_game_name">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <!-- End navigation search bar -->
             </div>
-            </div>
-        </nav>
+        </div>
+    </nav>
     <!-- End navigation bar -->
 
-    <div class="container-fluid">
-
     <!-- Start responsive banner image -->
-
     <img src="{{ url_for('static', filename='images/banner.jpg') }}" class="img-fluid" alt="Game image">
-
     <!-- End responsive banner image -->
 
-    {% block body_content %}
+    <!-- Creates a fluid container for all webpages in the project (note font control at end of class -->
+    <div class="container-fluid p-4 main_body">
 
-    <!-- Links to content created on individual pages -->
+    {% block body_content %}
+    <!-- The content of our projects HTML pages are placed here -->
 
 
     {% endblock %}
+    <!-- Ends the fluid container for all webpages in the project -->
     </div>
-
 
     <!-- Start footer -->
 
     <div class="container-fluid text-left bg-body-tertiary">
         <div class="row justify-content-md-left">
-            <div class="ms-3 p-2 col-lg-3">
-                <p><b>Address</b><br>
+            <div class="ms-3 p-3 col-lg-3 footer_text">
+                <div class="footer_header">Address</div>
                 We need a fake address<br>
                 Fake city<br>
-                Fake postcode</p>
+                Fake postcode<br>
             </div>
-            <div class="ms-3 p-2 col-lg-3">
-                <p><b>Opening times</b>
-                <br>
-                Monday 11am - 10pm<br>
-                Tuesday 11am - 10pm<br>
-                Wednesday 11am - 10pm<br>
-                Thursday 11am - 10pm<br>
-                Friday 11am - 10pm<br>
-                Saturday 11am - 10pm<br>
-                Sunday 11am - 10pm</p>
-            </div>
-            <div class="col">
-                <!-- Empty column -->
-           </div>
-            <div class="me-3 p-2 col-lg-3">
-                <p align="right"><b>Follow us!</b></p>
-                <a href="https://www.facebook.com"><img align="right" src="{{ url_for('static', filename='images/facebook_icon.png') }}" alt="Facebook" height="24"></a>
-                <a href="https://www.twitter.com"><img align="right" src="{{ url_for('static', filename='images/twitter_icon.png') }}" alt="Twitter" height="24"></a>
-                <a href="https://www.instagram.com"><img align="right" src="{{ url_for('static', filename='images/instagram_icon.png') }}" alt="Instagram" height="24"></a><br>
-                <br>
-                <p align="right">KAFV Projects<br>&copy 2023</p>
-            </div>
+        <div class="ms-3 p-3 col-lg-3 footer_text">
+            <div class="footer_header">Opening Times</div>
+            Daily: 11am - 10pm<br><br>
+            <div class="footer_header">Contact Us</div>
+            <span class="material-icons">phone</span>
+            0452-494-5745<br>
+            <!-- Insert Google Font Material Icon for Mail -->
+            <span class="material-icons">mail</span>
+            contact@ourboardgamecafe.co.uk<br>
+        </div>
+        <div class="me-3 p-3 col footer_text" align="right">
+            <!-- Empty column -->
+        </div>
+        <div class="me-3 p-3 col-lg-3 footer_text" align="right">
+            <div class="footer_header">Follow Us!</div>
+            <br>
+            <a href="https://www.facebook.com"><img class="social_icon" align="right" src="{{ url_for('static', filename='images/facebook_icon.png') }}" alt="Facebook" height="24"></a>
+            <a href="https://www.twitter.com"><img class="social_icon" align="right" src="{{ url_for('static', filename='images/twitter_icon.png') }}" alt="Twitter" height="24"></a>
+            <a href="https://www.instagram.com"><img class="social_icon" align="right" src="{{ url_for('static', filename='images/instagram_icon.svg') }}" alt="Instagram" height="24"></a><br>
+            <br>
+            <br>
+            KAFV Projects<br>&copy 2023
+        </div>
         </div>
     </div>
     <!-- End footer -->
