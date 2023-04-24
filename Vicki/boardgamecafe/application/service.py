@@ -91,7 +91,6 @@ def add_new_review(review):
     db.session.commit()
 
 
-
 # ADD NEW BOOKING
 def add_new_booking(booking):
     db.session.add(booking)
@@ -106,6 +105,18 @@ def get_customer_by_customer_id(customer_id):
 # GET REVIEW BY GAME ID
 def get_reviews_by_game_id(game_id):
     return db.session.query(Review).filter_by(game_id=game_id).order_by(Review.review_date.desc()).all()
+
+
+# CAFESESSION ID BY DATE AND SESSION - USED IN BOOKING FORM - VICKI
+def get_cafesession_by_date(session_date):
+    if not session_date:
+        return db.session.query(Cafesession).filter_by(session_date=session_date).first()
+    else:
+        return None
+
+
+def get_cafesession_by_type(session_type):
+    return db.session.query(Cafesession).filter_by(session_type=session_type).first()
 
 
 # GET CAFESESSION BY SESSION ID
