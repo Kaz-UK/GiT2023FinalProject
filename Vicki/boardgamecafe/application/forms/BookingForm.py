@@ -8,6 +8,7 @@ from application.models.customer import Customer
 from application.models.stock import Stock
 from application.models.game import Game
 import datetime
+from wtforms.validators import DataRequired, EqualTo, length
 
 
 class BookingForm(FlaskForm):
@@ -31,6 +32,6 @@ class BookingForm(FlaskForm):
         get_label='session_type'
     )
 
-    email = StringField('Customer email')
+    email = StringField('Customer email', validators=[DataRequired()])
 
     submit = SubmitField('Add Booking')

@@ -1,4 +1,4 @@
-from flask import render_template, jsonify, request
+from flask import render_template, jsonify, request, redirect
 
 from application.models.booking import Booking
 from application.models.cafesession import Cafesession
@@ -202,8 +202,7 @@ def add_new_review():
                            review_date=review_date, customer_id=cust, game_id=game.game_id)
             service.add_new_review(review)
             reviews = service.get_all_reviews()
-            return render_template('review.html', customer_id=cust, reviews=reviews, stars=stars, game_id=game.game_id, message=error)
-
+            return render_template('review.html', customer_id=cust, stars=stars, game_id=game.game_id, message=error)
     return render_template('new_review_form.html', form=form, message=error)
 
 
@@ -247,7 +246,7 @@ def add_new_booking():
             bookings = service.get_all_bookings()
             return render_template('booking.html', bookings=bookings, stock_id=game.game_id, session_id=session_date.session_id, customer_id=cust, number_of_tables=number_of_tables, message=error)
 
-    return render_template('new_booking_form.html', form=form, message=error)
+    return render_template('new_booking_form.html', game=Game, form=form, message=error)
 
 
 
