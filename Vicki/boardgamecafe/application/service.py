@@ -127,3 +127,8 @@ def get_cafe_session_by_session_id(cafesession):
 def get_searched_games(game_name):
     search = "%{}%".format(game_name)
     return db.session.query(Game).filter(Game.game_name.like(search)).all()
+
+# ADD NEW SESSION (ADMIN FACILITY), USED IN ADD SESSION FORM
+def add_new_session(session):
+    db.session.add(session)
+    db.session.commit()

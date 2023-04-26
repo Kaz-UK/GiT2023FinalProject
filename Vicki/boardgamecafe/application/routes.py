@@ -266,6 +266,20 @@ def show_game_details(game_name):
     return render_template('game.html', game=game, message=error, game_name=game_name, game_id=str(game.game_id),
                             first_names=first_names, reviews_for_game=reviews_for_game, title=game.game_name)
 
+# adding a session on add session form (admin user)
+@app.route('/add_session', methods=['GET', 'POST'])
+def add_session():
+    error = ""
+    form = SessionForm()
 
+    if request.method == 'POST':
+        form = SessionForm(request.form)
+        date = form.session_date.data
+        session_type = form.session_type.data
+        tables = form.table_count.data
+        session = Cafesession(session_type=session_type, session_date=date, table_count=tables)
+        service.add_new_session(session)
+        return render_template('admin_dashboard.html', form=form, error=error)
+    return render_template('add_session.html', form=form, error=error)
 
 

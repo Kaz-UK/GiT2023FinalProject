@@ -25,13 +25,10 @@ class BookingForm(FlaskForm):
         allow_blank=False,
         get_label='session_date'
     )
-    session_list = QuerySelectField(
-        'Cafesession',
-        query_factory=lambda: Cafesession.query,
-        allow_blank=False,
-        get_label='session_type'
-    )
 
+    session_list = SelectField(
+        'Cafesession', choices=[('Lunchtime', 'Lunchtime'), ('Afternoon', 'Afternoon'), ('Evening', 'Evening')]
+    )
     email = StringField('Customer email', validators=[DataRequired()])
 
     submit = SubmitField('Add Booking')

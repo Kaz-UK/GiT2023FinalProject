@@ -88,3 +88,10 @@ color: orange
 .img-fluid {
     width: 100%
     }
+
+#carousel_card {
+    margin: auto;
+}
+#cardtext{
+    text-align: center;
+}
