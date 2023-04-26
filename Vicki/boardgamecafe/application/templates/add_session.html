@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+<div class='container-sm' style="width:50%">
+    <h3>Add a new session to the booking system:</h3><br>
+    <form method='POST' action=''>
+        <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.session_date.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.session_date (class_="form-control", size =32)}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-10">{{ form.session_type.label (class_="form-label")}}</div>
+                <div class="col-md-10">{{ form.session_type}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-10">{{ form.table_count.label (class_="form-label")}}</div>
+                <div class="col-md-10">{{ form.table_count (class_="form-control") }}</div>
+            </div>
+        </div>
+        <div class="row">
+                <div class = "mb-3">
+                    <div class="col-md-2">{{ form.submit(class_="btn btn-primary mb-3") }}</div>
+                </div>
+        </div>
+                    {{ message }}
+
+
+    </form>
+</div>
+
+{% block footer_content %}
+{% endblock %}
+
+{% endblock %}
