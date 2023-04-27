@@ -25,6 +25,7 @@ def get_customer_by_id(customer_id):
         return None
 
 
+
 # ALL GAMES*
 def get_all_games():
     return db.session.query(Game).order_by(Game.game_name).all()
@@ -128,7 +129,20 @@ def get_searched_games(game_name):
     search = "%{}%".format(game_name)
     return db.session.query(Game).filter(Game.game_name.like(search)).all()
 
+
 # ADD NEW SESSION (ADMIN FACILITY), USED IN ADD SESSION FORM
 def add_new_session(session):
     db.session.add(session)
     db.session.commit()
+
+
+# SEARCH CUSTOMERS BY EMAIL TO DISPLAY THEIR DETAILS
+# def show_all_customer_details(email):
+#     if len(email) > 0:
+#         return db.session.query(Customer).filter_by(email=email).first()
+#     else:
+#         return None
+
+def show_all_customer_details(email):
+    search = "%{}%".format(email)
+    return db.session.query(Customer).filter_by(email=email).first()

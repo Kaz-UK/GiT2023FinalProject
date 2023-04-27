@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+<h3>Customer Details for {{customer.email}} belongs to:</h3>
+<div class="error_message">{{message}}</div>
+<div>
+    <table>
+       <tr>
+           <th>First Name</th>
+           <th>Last Name</th>
+           <th>Join Date</th>
+           <th>email</th>
+           <th>Phone Number</th>
+       </tr>
+        {% if customer_id > 0 %}
+        <tr>
+           <td>{{customer.first_name}}</td>
+            <td>{{customer.last_name}}</td>
+            <td>{{customer.join_date}}</td>
+            <td>{{customer.email}}</td>
+            <td>{{customer.phone_number}}</td>
+        </tr>
+        {% endif %}
+    </table>
+</div>
+
+{% block footer_content %}
+{% endblock %}
+
+{% endblock %}

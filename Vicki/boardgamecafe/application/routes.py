@@ -88,6 +88,8 @@ def show_customer(customer_id):
     #return render_template('customer.html', customer=customer, customer_id=customer_id, message=error, title="Customer Information")
 
 
+
+
 # ALL GAMES
 @app.route('/games', methods=['GET'])
 def show_games():
@@ -283,3 +285,17 @@ def add_session():
     return render_template('add_session.html', form=form, error=error)
 
 
+# SEARCH CUSTOMERS BY EMAIL TO DISPLAY THEIR DETAILS
+@app.route('/customers/<email>', methods=['GET'])
+def show_all_customer_details(email):
+    error = ""
+    customer = service.show_all_customer_details(email)
+    if not customer:
+        return jsonify("There is not customer with this email address")
+    else:
+        print(customer.first_name, customer.last_name, customer.join_date, customer.email, customer.phone_number)
+        #return jsonify(customer)
+    return render_template('customer_details.html', error=error, customer=customer, customer_id=customer.customer_id,
+                           first_name=customer.first_name,
+                           last_name=customer.last_name,
+                           join_date=customer.join_date, email=customer.email, phone_number=customer.phone_number)
