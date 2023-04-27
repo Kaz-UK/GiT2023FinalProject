@@ -176,12 +176,14 @@ def add_new_booking():
     return render_template('new_booking_form.html', game=Game, form=form, message=error)
 
 
-# INDIVIDUAL GAMES (FAYE)
+# INDIVIDUAL GAMES - FAYE
 @app.route('/games/<game_name>', methods=['GET'])
 def show_game_details(game_name):
     error = ""
     game = service.get_game_by_name(game_name)
     reviews_for_game = service.get_reviews_by_game_id(game.game_id)
+    coop_games = service.search_by_gameplay('co-operative')
+    two_player_games = service.search_games_by_num_of_players(2)
     first_names = []
     if not game:
         error = "There is no game called " + game_name
@@ -190,7 +192,8 @@ def show_game_details(game_name):
             customer = service.get_customer_by_customer_id(rev.customer_id)
             first_names.append(customer.first_name)
     return render_template('game.html', game=game, message=error, game_name=game_name, game_id=str(game.game_id),
-                            first_names=first_names, reviews_for_game=reviews_for_game, title=game.game_name)
+                            first_names=first_names, reviews_for_game=reviews_for_game,
+                           two_player_games=two_player_games, coop_games=coop_games, title=game.game_name)
 
 
 # ADD NEW CUSTOMER (KAREN)

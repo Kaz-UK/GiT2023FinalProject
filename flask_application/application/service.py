@@ -169,3 +169,11 @@ def add_new_session(session):
     db.session.add(session)
     db.session.commit()
 
+# SEARCH FOR GAME BY GAMEPLAY (Faye)
+def search_by_gameplay(gameplay):
+    return db.session.query(Game).filter_by(gameplay=gameplay).all()
+
+# SEARCH FOR GAME BY NUMBER OF PLAYERS (Faye)
+def search_games_by_num_of_players(num_of_players):
+    return db.session.query(Game).filter_by(num_of_players=num_of_players).all()
+
