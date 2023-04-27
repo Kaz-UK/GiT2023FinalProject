@@ -75,29 +75,7 @@ def search():
     return render_template('search.html', results=results, message=error, title='Search Results')
 
 
-# SEARCH ALL CUSTOMER-GENERAL QUERY (VICKI)*
-@app.route('/customers', methods=['GET'])
-def show_customers():
-    customers = service.get_all_customers()
-    if len(customers) == 0:
-        error = "There are no customers to display"
-    return jsonify(customers)
-
-
-# SEARCH CUSTOMERS BY ID*
-@app.route('/customers/<int:customer_id>', methods=['GET'])
-def show_customer(customer_id):
-    error = ""
-    customer = service.get_customer_by_id(customer_id)
-    if not customer:
-        return jsonify("There is no customer with ID: " + str(customer_id))
-    else:
-        print(customer.first_name, customer.last_name)
-    return jsonify(customer)
-    #return render_template('customer.html', customer=customer, customer_id=customer_id, message=error, title="Customer Information")
-
-
-# ALL GAMES
+# ALL GAMES (AMY)
 @app.route('/games', methods=['GET'])
 def show_games():
     error = ""
@@ -105,64 +83,6 @@ def show_games():
     if len(games) == 0:
         error = "There are no games to display"
     return render_template('games.html', games=games, message=error, title="All Games", len=len(games))
-    # return jsonify(games)
-
-
-# SEARCH ALL REVIEWS-GENERAL QUERY (VICKI)
-@app.route('/reviews', methods=['GET'])
-def show_reviews():
-    error = ""
-    reviews = service.get_all_reviews()
-    if len(reviews) == 0:
-        error = "There are no reviews to display"
-    #return render_template('customer.html', reviews=reviews, message=error, title="All Reviews")
-    return jsonify(reviews)
-
-
-# SEARCH ALL BOOKINGS - GENERAL QUERY (VICKI)*
-@app.route('/bookings', methods=['GET'])
-def show_bookings():
-    error = ""
-    bookings = service.get_all_bookings()
-    if len(bookings) == 0:
-        error = "There are no bookings to display"
-    #return render_template('customer.html', bookings=bookings, message=error, title="All Reviews")
-    return jsonify(bookings)
-
-
-# SEARCH ALL CAFESESSIONS - GENERAL QUERY (VICKI)*
-@app.route('/cafesessions', methods=['GET'])
-def show_cafesessions():
-    error = ""
-    cafesessions = service.get_all_cafesessions()
-    if len(cafesessions) == 0:
-        error = "There are no cafesessions to display"
-    #return render_template('customer.html', cafesessions=cafesessions, message=error, title="All Reviews")
-    return jsonify(cafesessions)
-
-
-# SEARCH ALL STOCK - GENERAL QUERY (VICKI)*
-@app.route('/stock', methods=['GET'])
-def show_stock():
-    error = ""
-    stock = service.get_all_stock()
-    if len(stock) == 0:
-        error = "There is no stock to display"
-    # return render_template('customer.html', stock=stock, message=error, title="All Reviews")
-    return jsonify(stock)
-
-
-# GET GAME BY GAME NAME (USED IN REVIEW)
-# @app.route('/games/<game_name>', methods=['GET'])
-# def show_game_details(game_name):
-#     error = ""
-#     game = service.get_game_by_name(game_name)
-#     if not game:
-#         error = "There is no game called " + game_name
-#     return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
-#     # return jsonify(game)
-
-
 
 
 # GET CUSTOMER ID FROM EMAIL - USED IN REVIEW & BOOKING FORM (VICKI)*
@@ -193,7 +113,6 @@ def display_game_details(game_name):
 def add_new_review():
     error = ""
     form = ReviewForm()
-
     if request.method == 'POST':
         form = ReviewForm(request.form)
         review = form.review.data
@@ -201,7 +120,6 @@ def add_new_review():
         review_date = datetime.date.today()
         customer = form.email.data
         game = form.game_list.data
-
         if not stars:
             error = "Please give a review"
         else:
@@ -355,19 +273,16 @@ def customer():
 @login_required
 def admin():
     if current_user.email == "admin@kafv.co.uk":
-        # Add admin dashboard information
         return render_template('admin.html', title="Admin Dashboard")
     else:
         return render_template('401.html', title="Unauthorised")
 
 
-# adding a session on add session form (admin user)
+# ADMIN - ADDING A SESSION (FAYE)
 @app.route('/admin/add-session', methods=['GET', 'POST'])
 @login_required
 def add_session():
     if current_user.email == "admin@kafv.co.uk":
-        # Add admin dashboard information
-        error = ""
         form = SessionForm()
         if request.method == 'POST':
             form = SessionForm(request.form)
@@ -376,7 +291,99 @@ def add_session():
             tables = form.table_count.data
             session = Cafesession(session_type=session_type, session_date=date, table_count=tables)
             service.add_new_session(session)
-            return render_template('admin.html', form=form, error=error)
-        return render_template('add-session.html', form=form, message=error)
+            return render_template('admin.html', form=form)
+        return render_template('add-session.html', form=form)
     else:
         return render_template('401.html', title="Unauthorised")
+
+
+# # SEARCH ALL REVIEWS-GENERAL QUERY (VICKI)
+# @app.route('/reviews', methods=['GET'])
+# def show_reviews():
+#     error = ""
+#     reviews = service.get_all_reviews()
+#     if len(reviews) == 0:
+#         error = "There are no reviews to display"
+#     #return render_template('customer.html', reviews=reviews, message=error, title="All Reviews")
+#     return jsonify(reviews)
+
+
+# # SEARCH ALL BOOKINGS - GENERAL QUERY (VICKI)*
+# @app.route('/bookings', methods=['GET'])
+# def show_bookings():
+#     error = ""
+#     bookings = service.get_all_bookings()
+#     if len(bookings) == 0:
+#         error = "There are no bookings to display"
+#     #return render_template('customer.html', bookings=bookings, message=error, title="All Reviews")
+#     return jsonify(bookings)
+
+
+# # SEARCH ALL CAFESESSIONS - GENERAL QUERY (VICKI)*
+# @app.route('/cafesessions', methods=['GET'])
+# def show_cafesessions():
+#     error = ""
+#     cafesessions = service.get_all_cafesessions()
+#     if len(cafesessions) == 0:
+#         error = "There are no cafesessions to display"
+#     #return render_template('customer.html', cafesessions=cafesessions, message=error, title="All Reviews")
+#     return jsonify(cafesessions)
+
+
+# # SEARCH ALL STOCK - GENERAL QUERY (VICKI)*
+# @app.route('/stock', methods=['GET'])
+# def show_stock():
+#     error = ""
+#     stock = service.get_all_stock()
+#     if len(stock) == 0:
+#         error = "There is no stock to display"
+#     # return render_template('customer.html', stock=stock, message=error, title="All Reviews")
+#     return jsonify(stock)
+
+
+# GET GAME BY GAME NAME (USED IN REVIEW) - THIS DOESN'T SEEM TO BE IN USE
+# @app.route('/games/<game_name>', methods=['GET'])
+# def show_game_details(game_name):
+#     error = ""
+#     game = service.get_game_by_name(game_name)
+#     if not game:
+#         error = "There is no game called " + game_name
+#     return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
+#     # return jsonify(game)
+
+
+# # SEARCH ALL CUSTOMER-GENERAL QUERY (VICKI)*
+# @app.route('/customers', methods=['GET'])
+# def show_customers():
+#     customers = service.get_all_customers()
+#     if len(customers) == 0:
+#         error = "There are no customers to display"
+#     return jsonify(customers)
+
+
+# # SEARCH CUSTOMERS
+# @app.route('/customers/<int:customer_id>', methods=['GET'])
+# def show_customer(customer_id):
+#     customer = service.get_customer_by_id(customer_id)
+#     if not customer:
+#         return jsonify("There is no customer with ID: " + str(customer_id))
+#     else:
+#         print(customer.first_name, customer.last_name)
+#     return jsonify(customer)# # SEARCH ALL CUSTOMER-GENERAL QUERY (VICKI)*
+# # @app.route('/customers', methods=['GET'])
+# # def show_customers():
+# #     customers = service.get_all_customers()
+# #     if len(customers) == 0:
+# #         error = "There are no customers to display"
+# #     return jsonify(customers)
+#
+#
+# # # SEARCH CUSTOMERS
+# # @app.route('/customers/<int:customer_id>', methods=['GET'])
+# # def show_customer(customer_id):
+# #     customer = service.get_customer_by_id(customer_id)
+# #     if not customer:
+# #         return jsonify("There is no customer with ID: " + str(customer_id))
+# #     else:
+# #         print(customer.first_name, customer.last_name)
+# #     return jsonify(customer)

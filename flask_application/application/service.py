@@ -149,9 +149,9 @@ def check_email_status(email):
         return "This email is already in use"
 
 
-# # GET CUSTOMER BY CUSTOMER ID (KAREN)
-# def get_customer_by_customer_id(customer_id):
-#     return db.session.query(Customer).filter_by(customer_id=customer_id).first()
+# GAME REVIEWS - GET CUSTOMER BY CUSTOMER ID (FAYE)
+def get_customer_by_customer_id(customer_id):
+    return db.session.query(Customer).filter_by(customer_id=customer_id).first()
 
 
 # GET CUSTOMER REVIEWS FOR CUSTOMER DASHBOARD (KAREN)
