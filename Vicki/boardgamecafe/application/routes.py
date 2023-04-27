@@ -13,6 +13,7 @@ from application import app, service
 from application.forms.ReviewForm import ReviewForm
 from application.forms.BookingForm import BookingForm
 from application.forms.game_search import SearchForm
+from application.forms.SessionForm import SessionForm
 
 import datetime
 
