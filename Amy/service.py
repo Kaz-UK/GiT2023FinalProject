@@ -1,5 +1,5 @@
 from flask import flash
-# from sqlalchemy import func
+from sqlalchemy import func
 
 import application.models.review
 from application.models.booking import Booking
@@ -40,11 +40,6 @@ def get_all_bookings():
     return db.session.query(Booking).all()
 
 
-# GET BOOKING BY CUSTOMER ID (KAREN)
-def get_customer_booking(customer_id):
-    return db.session.query(Booking).filter_by(customer_id=customer_id).all()
-
-
 # ALL CAFESESSIONS*
 def get_all_cafesessions():
     return db.session.query(Cafesession).all()
@@ -53,11 +48,6 @@ def get_all_cafesessions():
 # CAFESESSION ID BY DATE AND SESSION
 def get_cafesession_by_date_and_type(session_date, session_type):
     return db.session.query(Cafesession).filter_by(session_date=session_date, session_type=session_type).first()
-
-
-# ALL CAFESESSIONS - CUSTOMER DASHBOARD (KAREN)
-def get_cafe_session(session_id):
-    return db.session.query(Cafesession).filter_by(session_id=session_id).all()
 
 
 # ALL STOCK*
@@ -106,6 +96,17 @@ def add_new_booking(booking):
     db.session.commit()
 
 
+# ADD NEW GAME* added by Amy 25Apr23
+def add_new_game(game):
+    db.session.add(game)
+    db.session.commit()
+
+
+# GET CUSTOMER BY CUSTOMER ID*
+def get_customer_by_customer_id(customer_id):
+    return db.session.query(Customer).filter_by(customer_id=customer_id).first()
+
+
 # GET REVIEW BY GAME ID*
 def get_reviews_by_game_id(game_id):
     return db.session.query(Review).filter_by(game_id=game_id).order_by(Review.review_date.desc()).all()
@@ -128,52 +129,7 @@ def get_cafe_session_by_session_id(cafesession):
     return db.session.query(Cafesession).filter_by(cafesession=cafesession).order_by(func.max(Cafesession.session_id))
 
 
-# NAV BAR SEARCH FUNCTION (KAREN)
+# SEARCH GAME BY NAME (USED BY SEARCH NAVIGATION BAR)
 def get_searched_games(game_name):
     search = "%{}%".format(game_name)
     return db.session.query(Game).filter(Game.game_name.like(search)).all()
-
-
-# ADD NEW CUSTOMER (KAREN)
-def add_new_customer(customer):
-    db.session.add(customer)
-    db.session.commit()
-
-
-# ADD NEW CUSTOMER - CHECK IF EXISTING CUSTOMER (KAREN)
-def check_email_status(email):
-    status = db.session.query(Customer).filter_by(email=email).first()
-    if not status:
-        return None
-    else:
-        return "This email is already in use"
-
-
-# GAME REVIEWS - GET CUSTOMER BY CUSTOMER ID (FAYE)
-def get_customer_by_customer_id(customer_id):
-    return db.session.query(Customer).filter_by(customer_id=customer_id).first()
-
-
-# GET CUSTOMER REVIEWS FOR CUSTOMER DASHBOARD (KAREN)
-def get_reviews(customer_id):
-    return db.session.query(Review).filter_by(customer_id=customer_id).all
-
-
-# GET GAMES BY GAME ID FOR CUSTOMER DASHBOARD (KAREN)
-def get_game_name_by_id(game_id):
-    return db.session.query(Game).filter_by(game_id=game_id).all
-
-
-# ADD NEW SESSION - ADMIN USER (FAYE)
-def add_new_session(session):
-    db.session.add(session)
-    db.session.commit()
-
-# SEARCH FOR GAME BY GAMEPLAY (Faye)
-def search_by_gameplay(gameplay):
-    return db.session.query(Game).filter_by(gameplay=gameplay).all()
-
-# SEARCH FOR GAME BY NUMBER OF PLAYERS (Faye)
-def search_games_by_num_of_players(num_of_players):
-    return db.session.query(Game).filter_by(num_of_players=num_of_players).all()
-

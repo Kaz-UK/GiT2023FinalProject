@@ -13,7 +13,7 @@ from application import app, service
 from application.forms.ReviewForm import ReviewForm
 from application.forms.BookingForm import BookingForm
 from application.forms.game_search import SearchForm
-from application.forms.SessionForm import SessionForm
+from application.forms.GameForm import GameForm
 
 import datetime
 
@@ -89,8 +89,6 @@ def show_customer(customer_id):
     #return render_template('customer.html', customer=customer, customer_id=customer_id, message=error, title="Customer Information")
 
 
-
-
 # ALL GAMES
 @app.route('/games', methods=['GET'])
 def show_games():
@@ -144,19 +142,6 @@ def show_stock():
         error = "There is no stock to display"
     #return render_template('customer.html', stock=stock, message=error, title="All Reviews")
     return jsonify(stock)
-
-
-# GET GAME BY GAME NAME (USED IN REVIEW)
-# @app.route('/games/<game_name>', methods=['GET'])
-# def show_game_details(game_name):
-#     error = ""
-#     game = service.get_game_by_name(game_name)
-#     if not game:
-#         error = "There is no game called " + game_name
-#     return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
-#     # return jsonify(game)
-
-
 
 
 # GET CUSTOMER ID FROM EMAIL - USED IN REVIEW & BOOKING FORM - VICKI*
@@ -269,34 +254,32 @@ def show_game_details(game_name):
     return render_template('game.html', game=game, message=error, game_name=game_name, game_id=str(game.game_id),
                             first_names=first_names, reviews_for_game=reviews_for_game, title=game.game_name)
 
-# adding a session on add session form (admin user)
-@app.route('/add_session', methods=['GET', 'POST'])
-def add_session():
+
+
+# ADD NEW GAME FORM - AMY
+@app.route('/new_game', methods=['GET','POST'])
+def add_new_game():
     error = ""
-    form = SessionForm()
+    form = GameForm()
 
     if request.method == 'POST':
-        form = SessionForm(request.form)
-        date = form.session_date.data
-        session_type = form.session_type.data
-        tables = form.table_count.data
-        session = Cafesession(session_type=session_type, session_date=date, table_count=tables)
-        service.add_new_session(session)
-        return render_template('admin_dashboard.html', form=form, error=error)
-    return render_template('add_session.html', form=form, error=error)
+        form = GameForm(request.form)
+        game_name = form.game_name.data
+        num_of_players = form.num_of_players.data
+        min_age = form.min_age.data
+        duration_of_play_time = form.duration_of_play_time.data
+        game_description = form.game_description.data
+        gameplay = form.gameplay.data
+        if len(game_name) == 0 or not num_of_players or not min_age or not duration_of_play_time:
+            error = "Please supply all game details"
+        else:
+            game = Game(game_name=game_name, num_of_players=num_of_players,
+                        min_age=min_age, duration_of_play_time=duration_of_play_time, gameplay=gameplay,
+                        game_description=game_description)
 
+            service.add_new_game(game)
+            # games = service.get_all_games()
+            return render_template('home.html')
 
-# SEARCH CUSTOMERS BY EMAIL TO DISPLAY THEIR DETAILS
-@app.route('/customers/<email>', methods=['GET'])
-def show_all_customer_details(email):
-    error = ""
-    customer = service.show_all_customer_details(email)
-    if not customer:
-        return jsonify("There is not customer with this email address")
-    else:
-        print(customer.first_name, customer.last_name, customer.join_date, customer.email, customer.phone_number)
-        #return jsonify(customer)
-    return render_template('customer_details.html', error=error, customer=customer, customer_id=customer.customer_id,
-                           first_name=customer.first_name,
-                           last_name=customer.last_name,
-                           join_date=customer.join_date, email=customer.email, phone_number=customer.phone_number)
+    return render_template('new_game_form.html', form=form, message=error)
+

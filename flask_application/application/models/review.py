@@ -2,6 +2,7 @@ from application import db
 from dataclasses import dataclass
 import datetime
 
+
 @dataclass
 class Review(db.Model):
 

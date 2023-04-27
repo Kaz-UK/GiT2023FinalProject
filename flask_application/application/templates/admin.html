@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+    <!-- Insert HTML local to this page -->
+
+    <!-- Start general about us text -->
+
+    <h2>Admin Dashboard</h2>
+    <br>
+    <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('add_session') }}">Add Session</a></button>
+    <br>
+    <br>
+    <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></button>
+    <br>
+    <br>
+
+    <!-- Do not type below this line -->
+
+{% block footer_content %}
+{% endblock %}
+
+{% endblock %}
