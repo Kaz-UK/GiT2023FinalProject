@@ -1,5 +1,9 @@
-flask==2.2.3
+flask==2.2
 flask-sqlalchemy
 pymysql
-WTForms~=3.0.1
+WTForms~=2.3.3
 flask-wtf
+
+# flask_forms
+
+flask_login
