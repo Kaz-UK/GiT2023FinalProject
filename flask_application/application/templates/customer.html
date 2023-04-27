@@ -1,15 +1,79 @@
 {% extends "layout.html" %}
 {% block body_content %}
 
-  <!-- Insert HTML local to this page -->
+    <!-- Insert HTML local to this page -->
+
+    <!-- Start general about us text -->
+
+    <h2>Account Details: {{ current_user.first_name }} {{ current_user.last_name }}</h2>
+
+    <br>
+
+    <p>Welcome {{ current_user.first_name }} <br><br> <a class="nav-link" href="{{ url_for('logout') }}">Logout</a></p>
+    <br>
 
 
+    <h3>Your Reviews</h3>
+    {{ message }}
 
 
+        <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" style="width:20%">Game Name</th>
+                <th scope="col" style="width:60%">Review</th>
+                <th scope="col" style="width:10%">Stars</th>
+                <th scope="col" style="width:15%">Review Date</th>
+            </tr>
+        </thead>
+        {% for rev in reviews %}
+        <tbody>
+            <tr>
+                <td scope="row">{{rev.game}}</td>
+                <td scope="row">{{rev.review}}</td>
+                <td scope="row">
+                    {% if rev.stars == 1 %}
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    {% elif rev.stars == 2 %}
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    {% elif rev.stars == 3 %}
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    {% elif rev.stars == 4 %}
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    {% else %}
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    {% endif %}
+                </td>
+                <td scope="row">{{rev.review_date}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
+    <br>
+    <br>
 
-
-  <!-- Do not type below this line -->
+    <!-- Do not type below this line -->
 
 {% block footer_content %}
 {% endblock %}
