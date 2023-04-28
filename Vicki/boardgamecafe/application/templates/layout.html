@@ -53,6 +53,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('add_new_review') }}">Write a Review</a>
                 </li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('customer') }}">Account</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                </li>
+                {% endif %}
             </ul>
             <!-- Start navigation search bar -->
             <form method="POST" action="{{ url_for('search') }}" class="d-flex" role="search">
@@ -67,7 +79,7 @@
     <!-- End navigation bar -->
 
     <!-- Start responsive banner image -->
-    <img src="{{ url_for('static', filename='images/banner.jpg') }}" class="img-fluid" alt="Game image">
+    <img src="{{ url_for('static', filename='images/banner.jpg') }}" class="img-fluid" alt="Game image" width="100%">
     <!-- End responsive banner image -->
 
     <!-- Creates a fluid container for all webpages in the project (note font control at end of class -->
@@ -109,7 +121,7 @@
             <br>
             <a href="https://www.facebook.com"><img class="social_icon" align="right" src="{{ url_for('static', filename='images/facebook_icon.png') }}" alt="Facebook" height="24"></a>
             <a href="https://www.twitter.com"><img class="social_icon" align="right" src="{{ url_for('static', filename='images/twitter_icon.png') }}" alt="Twitter" height="24"></a>
-            <a href="https://www.instagram.com"><img class="social_icon" align="right" src="{{ url_for('static', filename='images/instagram_icon.png') }}" alt="Instagram" height="24"></a><br>
+            <a href="https://www.instagram.com"><img class="social_icon" align="right" src="{{ url_for('static', filename='images/instagram_icon.svg') }}" alt="Instagram" height="24"></a><br>
             <br>
             <br>
             KAFV Projects<br>&copy 2023
@@ -120,3 +132,4 @@
 
 </body>
 </html>
+

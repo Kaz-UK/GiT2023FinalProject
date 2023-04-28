@@ -28,77 +28,31 @@
             </div>
         </div>
     </div>
-
-
-        <h2> Up coming events </h2>
+    <h2> Up coming events... </h2>
 
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div id="carousel_card" class="card" style="width: 25rem;" >
-                <img src="{{ url_for('static', filename='images/16.jpg') }}" class="card-img-top" alt="..">
-                <div id="cardtext" class="card-body">
-                  <h3 class="card-title, text-align: centre" style="margin: auto;"> Monopoly Mondays </h3>
-                  <p class="card-text text centre" style="margin: auto;"> Come and join us every Monday, bring your own edition for Monopoly madness! </p>
-                  <a href="{{ url_for('add_new_booking') }}" class="btn btn-primary" style="margin: auto;" > Book Now </a>
-                </div>
+            <div  class="carousel-item active">
+                <img src="{{ url_for('static', filename='images/16.jpg') }}" class="d-block mx-auto rounded text aligne centre" style="width:350px;height:450px;" alt="..">
               </div>
-            </div>
-
-
             <div class="carousel-item">
-              <div id="carousel_card" class="card" style="width: 25rem;" >
-                <img src="{{ url_for('static', filename='images/1.jpg')}}" class="card-img-top" alt="...">
-                <div id="cardtext" class="card-body">
-                  <h3 class="card-title" style="margin: auto;"> Takenoko Tuesdays </h3>
-                  <p class="card-text" style="margin: auto;"> Come and join us every Tuesday and get a free drink with Takenoko! </p>
-                  <a href="{{ url_for('add_new_booking') }}" class="btn btn-primary" style="margin: auto;" > Book Now </a>
-                </div>
+                <img src="{{ url_for('static', filename='images/1.jpg')}}" class="d-block mx-auto rounded" style="width:350px;height:450px" alt="...">
               </div>
-            </div>
-
             <div class="carousel-item">
-              <div id="carousel_card" class="card" style="width: 25rem;" >
-                <img src="{{ url_for('static', filename='images/3.jpg')}}" class="card-img-top" alt="...">
-                <div id="cardtext" class="card-body">
-                  <h3 class="card-title" style="margin: auto;"> Wingspan Wednesdays </h3>
-                  <p class="card-text" style="margin: auto;"> Come and join us on a Wednesday and receive a complimentary snack bowl with Wingspan! </p>
-                  <a href="{{ url_for('add_new_booking') }}" class="btn btn-primary" style="margin: auto;" > Book Now </a>
-                </div>
+                <img src="{{ url_for('static', filename='images/3.jpg')}}" class="d-block mx-auto rounded" style="width:350px;height:450px" alt="...">
               </div>
-            </div>
-
-
             <div class="carousel-item">
-              <div id="carousel_card" class="card" style="width: 25rem;" >
-                <img src="{{ url_for('static', filename='images/15.jpg')}}" class="card-img-top" alt="...">
-                <div id="cardtext" class="card-body">
-                  <h3 class="card-title" style="margin: auto;"> Forbidden Island Fridays </h3>
-                  <p class="card-text" style="margin: auto;"> Join us on a Friday with Forbidden Island and book another session through the following week for free! </p>
-                  <a href="{{ url_for('add_new_booking') }}" class="btn btn-primary" style="margin: auto;"> Book Now </a>
-                </div>
+                <img src="{{ url_for('static', filename='images/15.jpg')}}" class="d-block mx-auto rounded" style="width:350px;height:450px" alt="...">
               </div>
-            </div>
-
-
             <div class="carousel-item">
-              <div id="carousel_card" class="card" style="width: 25rem;" >
-                <img src="{{ url_for('static', filename='images/dice_game.jpg')}}" class="card-img-top" alt="...">
-                <div id="cardtext" class="card-body">
-                  <h3 class="card-title" style="margin: auto;"> Weekend Madness </h3>
-                  <p class="card-text" style="margin: auto;"> Book any session on a Saturday or Sunday and second table at the same session for half price! </p>
-                  <a href="{{ url_for('add_new_booking') }}" class="btn btn-primary" style="margin: auto;"> Book Now </a>
-                </div>
-            </div>
-            </div>
-          </div>
-        </div>
-              <div>
-              <p>
+                <img src="{{ url_for('static', filename='images/dice_game.jpg')}}" class="d-block mx-auto rounded" style="width:350px;height:450px" alt="...">
 
-                  Please note all of these offers are on a first come, first served basis so please book early to avoid disappointment!
-              </p>
-              </div>
+            </div>
+            </div>
+            </div>
+
+
+
   <!-- Do not type below this line -->
 
 {% block footer_content %}

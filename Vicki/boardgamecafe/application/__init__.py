@@ -2,7 +2,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-
+from flask_login import LoginManager, UserMixin
 
 
 user = 'webconnection'
@@ -24,3 +24,13 @@ app.config['SECRET_KEY'] = 'YOUR_SECRET_KEY'
 
 # link our app to the persistence layer
 db = SQLAlchemy(app)
+
+login_manager = LoginManager(app)
+
+
+from application.models.customer import Customer
+
+
+@login_manager.user_loader
+def load_user(customer_id):
+    return Customer.query.get(customer_id)
