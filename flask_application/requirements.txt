@@ -3,7 +3,4 @@ flask-sqlalchemy
 pymysql
 WTForms~=2.3.3
 flask-wtf
-
-# flask_forms
-
 flask_login

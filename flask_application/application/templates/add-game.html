@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+  <!-- Insert HTML local to this page -->
+
+    <div class='container-sm' style="width:50%">
+    <h2>Add Game</h2><br>
+    <form method='POST' action=''>
+        <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
+        {{ form.csrf_token }}
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.game_name.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.game_name (class_="form-control", size=32)}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.num_of_players.label(class_="form-label")}}</div>
+                <div class="col-md-10">{{ form.num_of_players (class_="form-control", size=5)}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.min_age.label (class_="form-label")}}</div>
+                <div class="col-md-10">{{ form.min_age (class_="form-control", size=5) }}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.duration_of_play_time.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.duration_of_play_time (class_="form-control", size=5) }}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.gameplay.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.gameplay (class_="form-control", size=2) }}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.game_description.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.game_description (class_="form-control", size=500) }}</div>
+            </div>
+        </div>
+        <div class="row">
+                <div class = "mb-3">
+                    <div class="col-md-2">{{ form.submit(class_="btn btn-primary mb-3") }}</div>
+                </div>
+        </div>
+            {{ message }}
+    </form>
+        <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('admin') }}">Admin Dashboard</a></button>
+    </div>
+
+  <!-- Do not type below this line -->
+
+{% block footer_content %}
+{% endblock %}
+
+{% endblock %}

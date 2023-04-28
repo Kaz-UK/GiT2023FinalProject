@@ -1,7 +1,6 @@
 from flask import flash
 # from sqlalchemy import func
 
-import application.models.review
 from application.models.booking import Booking
 from application.models.cafesession import Cafesession
 from application.models.customer import Customer
@@ -30,12 +29,12 @@ def get_all_games():
     return db.session.query(Game).order_by(Game.game_name).all()
 
 
-# ALL Reviews*
+# ALL REVIEWS
 def get_all_reviews():
     return db.session.query(Review).all()
 
 
-# ALL Bookings*
+# ALL BOOKINGS*
 def get_all_bookings():
     return db.session.query(Booking).all()
 
@@ -65,7 +64,7 @@ def get_all_stock():
     return db.session.query(Stock).all()
 
 
-# GET GAME BY GAME NAME (USED BY INDIVIDUAL GAMES PAGE)*
+# INDIVIDUAL GAMES PAGE - GET GAME BY GAME NAME (FAYE)*
 def get_game_by_name(game_name):
     if len(game_name) > 0:
         game = db.session.query(Game).filter_by(game_name=game_name).first()
@@ -74,13 +73,13 @@ def get_game_by_name(game_name):
         return None
 
 
-# GET GAME ID FROM GAME NAME - USED IN REVIEW - VICKI
+# REVIEW - GET GAME ID FROM GAME NAME (VICKI)
 def get_game_id_by_name(game_name):
     game = db.session.query(Game).filter_by(game_name=game_name).first()
     return game.game_id
 
 
-# GET GAME ID FROM GAME NAME - USED IN REVIEW - VICKI
+# REVIEW - GET GAME ID FROM GAME NAME (VICKI)
 def show_game_details(game_name):
     if not game_name:
         game = db.session.query(Game).filter_by(game_name=game_name).first()
@@ -111,7 +110,7 @@ def get_reviews_by_game_id(game_id):
     return db.session.query(Review).filter_by(game_id=game_id).order_by(Review.review_date.desc()).all()
 
 
-# CAFESESSION ID BY DATE AND SESSION - USED IN BOOKING FORM - VICKI
+# BOOKING - CAFESESSION ID BY DATE AND SESSION (VICKI)
 def get_cafesession_by_date(session_date):
     if not session_date:
         return db.session.query(Cafesession).filter_by(session_date=session_date).first()
@@ -169,11 +168,18 @@ def add_new_session(session):
     db.session.add(session)
     db.session.commit()
 
-# SEARCH FOR GAME BY GAMEPLAY (Faye)
+
+# SEARCH FOR GAME BY GAMEPLAY (FAYE)
 def search_by_gameplay(gameplay):
     return db.session.query(Game).filter_by(gameplay=gameplay).all()
 
-# SEARCH FOR GAME BY NUMBER OF PLAYERS (Faye)
+
+# SEARCH FOR GAME BY NUMBER OF PLAYERS (FAYE)
 def search_games_by_num_of_players(num_of_players):
     return db.session.query(Game).filter_by(num_of_players=num_of_players).all()
 
+
+# ADD NEW GAME (AMY)
+def add_new_game(game):
+    db.session.add(game)
+    db.session.commit()

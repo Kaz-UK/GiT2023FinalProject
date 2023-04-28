@@ -17,6 +17,7 @@ from application.forms.SearchForm import SearchForm
 from application.forms.RegistrationForm import RegistrationForm
 from application.forms.LoginForm import LoginForm
 from application.forms.SessionForm import SessionForm
+from application.forms.GameForm import GameForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
@@ -82,7 +83,7 @@ def show_games():
     games = service.get_all_games()
     if len(games) == 0:
         error = "There are no games to display"
-    return render_template('games.html', games=games, message=error, title="All Games", len=len(games))
+    return render_template('games.html', games=games, message=error, title="All Games")
 
 
 # GET CUSTOMER ID FROM EMAIL - USED IN REVIEW & BOOKING FORM (VICKI)*
@@ -176,7 +177,7 @@ def add_new_booking():
     return render_template('new_booking_form.html', game=Game, form=form, message=error)
 
 
-# INDIVIDUAL GAMES - FAYE
+# INDIVIDUAL GAMES (FAYE)
 @app.route('/games/<game_name>', methods=['GET'])
 def show_game_details(game_name):
     error = ""
@@ -194,7 +195,6 @@ def show_game_details(game_name):
     return render_template('game.html', game=game, message=error, game_name=game_name, game_id=str(game.game_id),
                             first_names=first_names, reviews_for_game=reviews_for_game,
                            two_player_games=two_player_games, coop_games=coop_games, title=game.game_name)
-
 
 # ADD NEW CUSTOMER (KAREN)
 @app.route('/register', methods=['GET','POST'])
@@ -294,8 +294,36 @@ def add_session():
             tables = form.table_count.data
             session = Cafesession(session_type=session_type, session_date=date, table_count=tables)
             service.add_new_session(session)
-            return render_template('admin.html', form=form)
+            flash("Session added successfully")
+            return render_template('admin.html')
         return render_template('add-session.html', form=form)
+    else:
+        return render_template('401.html', title="Unauthorised")
+
+
+# ADD NEW GAME FORM (AMY)
+@app.route('/admin/add-game', methods=['GET','POST'])
+def add_new_game():
+    if current_user.email == "admin@kafv.co.uk":
+        form = GameForm()
+        if request.method == 'POST':
+            form = GameForm(request.form)
+            game_name = form.game_name.data
+            num_of_players = form.num_of_players.data
+            min_age = form.min_age.data
+            duration_of_play_time = form.duration_of_play_time.data
+            game_description = form.game_description.data
+            gameplay = form.gameplay.data
+            if len(game_name) == 0 or not num_of_players or not min_age or not duration_of_play_time:
+                error = "Please supply all game details"
+            else:
+                game = Game(game_name=game_name, num_of_players=num_of_players,
+                            min_age=min_age, duration_of_play_time=duration_of_play_time, gameplay=gameplay,
+                            game_description=game_description)
+                service.add_new_game(game)
+                flash("Game added successfully")
+            return render_template('admin.html')
+        return render_template('add-game.html', form=form)
     else:
         return render_template('401.html', title="Unauthorised")
 

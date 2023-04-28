@@ -4,10 +4,15 @@
     <!-- Insert HTML local to this page -->
 
     <!-- Start general about us text -->
-
     <h2>Admin Dashboard</h2>
+    {% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+    {% endfor %}
     <br>
     <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('add_session') }}">Add Session</a></button>
+    <br>
+    <br>
+    <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('add_new_game') }}">Add Game</a></button>
     <br>
     <br>
     <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></button>
