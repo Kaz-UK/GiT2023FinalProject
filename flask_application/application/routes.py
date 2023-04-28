@@ -303,6 +303,7 @@ def add_session():
 
 # ADD NEW GAME FORM (AMY)
 @app.route('/admin/add-game', methods=['GET','POST'])
+@login_required
 def add_new_game():
     if current_user.email == "admin@kafv.co.uk":
         form = GameForm()
