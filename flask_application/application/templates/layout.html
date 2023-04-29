@@ -32,7 +32,7 @@
             <!-- Start navigation logo -->
             <!-- <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Board game cafe" width="30" height="24"> -->
             <!-- End navigation logo -->
-            <a class="navbar-brand" href="{{ url_for('home') }}">Boardgame Cafe</a>
+            <a class="navbar-brand" href="{{ url_for('home') }}">Roll With It!</a>
                 <!-- Start hamburger menu (only shows when screen is small) -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -53,18 +53,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('add_new_review') }}">Write a Review</a>
                 </li>
-                {% if current_user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('customer') }}">Account</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('register') }}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-                </li>
-                {% endif %}
             </ul>
             <!-- Start navigation search bar -->
             <form method="POST" action="{{ url_for('search') }}" class="d-flex" role="search">
@@ -79,7 +67,7 @@
     <!-- End navigation bar -->
 
     <!-- Start responsive banner image -->
-    <img src="{{ url_for('static', filename='images/banner.jpg') }}" class="img-fluid" alt="Game image" width="100%">
+    <img src="{{ url_for('static', filename='images/banner.jpg') }}" class="img-fluid" alt="Game image">
     <!-- End responsive banner image -->
 
     <!-- Creates a fluid container for all webpages in the project (note font control at end of class -->
@@ -99,9 +87,10 @@
         <div class="row justify-content-md-left">
             <div class="ms-3 p-3 col-lg-3 footer_text">
                 <div class="footer_header">Address</div>
-                We need a fake address<br>
-                Fake city<br>
-                Fake postcode<br>
+                Roll With It!<br>
+                Leeds Dock<br>
+                Leeds<br>
+                LS10 1QG<br>
             </div>
         <div class="ms-3 p-3 col-lg-3 footer_text">
             <div class="footer_header">Opening Times</div>
@@ -111,7 +100,7 @@
             0452-494-5745<br>
             <!-- Insert Google Font Material Icon for Mail -->
             <span class="material-icons">mail</span>
-            contact@ourboardgamecafe.co.uk<br>
+            customerservice@rollwithit.co.uk<br>
         </div>
         <div class="me-3 p-3 col footer_text" align="right">
             <!-- Empty column -->
@@ -121,7 +110,7 @@
             <br>
             <a href="https://www.facebook.com"><img class="social_icon" align="right" src="{{ url_for('static', filename='images/facebook_icon.png') }}" alt="Facebook" height="24"></a>
             <a href="https://www.twitter.com"><img class="social_icon" align="right" src="{{ url_for('static', filename='images/twitter_icon.png') }}" alt="Twitter" height="24"></a>
-            <a href="https://www.instagram.com"><img class="social_icon" align="right" src="{{ url_for('static', filename='images/instagram_icon.svg') }}" alt="Instagram" height="24"></a><br>
+            <a href="https://www.instagram.com"><img class="social_icon" align="right" src="{{ url_for('static', filename='images/instagram_icon.png') }}" alt="Instagram" height="24"></a><br>
             <br>
             <br>
             KAFV Projects<br>&copy 2023

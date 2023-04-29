@@ -7,6 +7,8 @@
     font-family: 'Cabin', sans-serif;
     }
 
+h3, h2, h4, h5 { font-family: 'DynaPuff', cursive, sans-serif;}
+
 /* Default colour */
 
 body {
@@ -71,6 +73,9 @@ body {
 .social_icon {
     padding-left: 10px;
     }
+
+/* Circular images on homepage */
+.home_images { border-radius:50%;}
 
 /* Aligns Google Font's material icon to text */
 .material-icons {
