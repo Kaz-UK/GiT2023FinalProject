@@ -283,3 +283,8 @@ def add_new_game():
 
     return render_template('new_game_form.html', form=form, message=error)
 
+# Creates a menu page using the Jinja template* ADDED BY AMY 29/04/23
+@app.route('/')
+@app.route('/menu')
+def menu():
+    return render_template('menu.html', title="Menu")
