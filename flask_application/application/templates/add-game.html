@@ -10,38 +10,38 @@
         {{ form.csrf_token }}
         <div class="row">
             <div class = "mb-3">
-                <div class="col-md-2">{{ form.game_name.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.game_name.label (class_="form-label") }}</div>
                 <div class="col-md-10">{{ form.game_name (class_="form-control", size=32)}}</div>
             </div>
         </div>
         <div class="row">
             <div class = "mb-3">
-                <div class="col-md-2">{{ form.num_of_players.label(class_="form-label")}}</div>
+                <div class="col-md-10">{{ form.num_of_players.label(class_="form-label")}}</div>
                 <div class="col-md-10">{{ form.num_of_players (class_="form-control", size=5)}}</div>
             </div>
         </div>
         <div class="row">
             <div class = "mb-3">
-                <div class="col-md-2">{{ form.min_age.label (class_="form-label")}}</div>
+                <div class="col-md-10">{{ form.min_age.label (class_="form-label")}}</div>
                 <div class="col-md-10">{{ form.min_age (class_="form-control", size=5) }}</div>
             </div>
         </div>
         <div class="row">
             <div class = "mb-3">
-                <div class="col-md-2">{{ form.duration_of_play_time.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.duration_of_play_time.label (class_="form-label") }}</div>
                 <div class="col-md-10">{{ form.duration_of_play_time (class_="form-control", size=5) }}</div>
             </div>
         </div>
         <div class="row">
             <div class = "mb-3">
-                <div class="col-md-2">{{ form.gameplay.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.gameplay.label (class_="form-label") }}</div>
                 <div class="col-md-10">{{ form.gameplay (class_="form-control", size=2) }}</div>
             </div>
         </div>
         <div class="row">
             <div class = "mb-3">
-                <div class="col-md-2">{{ form.game_description.label (class_="form-label") }}</div>
-                <div class="col-md-10">{{ form.game_description (class_="form-control", size=500) }}</div>
+                <div class="col-md-10">{{ form.game_description.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.game_description (class_="form-control", rows=4) }}</div>
             </div>
         </div>
         <div class="row">

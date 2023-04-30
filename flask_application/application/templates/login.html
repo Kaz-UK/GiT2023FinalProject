@@ -4,13 +4,16 @@
 
     <!-- Insert HTML local to this page -->
 
-
-        <div class='container-sm' style="width:50%">
+    <div class='container-sm' style="width:50%">
     <form method='POST' action=''>
         <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
         {{ form.csrf_token }}
               <div class="row">
             <div class = "mb-6">
+                    {% for message in get_flashed_messages() %}
+                    <br>
+                    <p>{{ message }}</p>
+                    {% endfor %}
                 <div class="col"><h2>Login</h2></div>
                 <br>
             </div>
@@ -28,31 +31,17 @@
                 <div class="col-md-10">{{ form.password(class_="form-control", size =32)}}</div>
             </div>
         </div>
-            {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="notification id-danger">
-            {{ messages[0] }}
-        </div>
-    {% endif %}
-    {% endwith %}
-        {{ message }}
         <div class="row">
                 <div class = "mb-3">
                     <div class="col-md-2">{{ form.submit(class_="btn btn-primary mb-3") }}</div>
                 </div>
         </div>
-
-
     </form>
-</div>
-
-
-
-
+        <p>New to Roll With It? <a href="{{ url_for('register') }}">Create an account!</a></p>
+    </div>
 
 
     <!-- Do not type below this line -->
-
 
 
 {% block footer_content %}

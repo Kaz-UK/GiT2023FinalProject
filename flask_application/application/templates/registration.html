@@ -10,7 +10,13 @@
         {{ form.csrf_token }}
         <div class="row">
             <div class = "mb-6">
-                <div class="col"><h2>Registration Form</h2></div>
+                <div class="col">
+                    {% for message in get_flashed_messages() %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    <h2>Sign Up</h2>
+                    <p>Once registered you can manage your bookings and write reviews.</p>
+                </div>
                 <br>
             </div>
         </div>
@@ -47,7 +53,7 @@
 
                                   <div class="row">
             <div class = "mb-3">
-                <div class="col-md-2">{{ form.confirm_customer_password.label(class_="form-label")}}</div>
+                <div class="col-md-10">{{ form.confirm_customer_password.label(class_="form-label")}}</div>
                 <div class="col-md-10">{{ form.confirm_customer_password(class_="form-control", size =32)}}</div>
             </div>
         </div>
@@ -56,7 +62,6 @@
                     <div class="col-md-2">{{ form.submit(class_="btn btn-primary mb-3") }}</div>
                 </div>
         </div>
-            {{ message }}
 
 
     </form>

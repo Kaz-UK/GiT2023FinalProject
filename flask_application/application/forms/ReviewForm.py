@@ -1,17 +1,15 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, SelectField
+from wtforms import StringField, SubmitField, IntegerField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-
-
-from application.models.review import Review
-from application.models.customer import Customer
+# from application.models.review import Review
+# from application.models.customer import Customer
 from application.models.game import Game
-from wtforms.validators import DataRequired, EqualTo, length
+from wtforms.validators import DataRequired, Length
+from wtforms.widgets import TextArea
+
 
 class ReviewForm(FlaskForm):
-
-    email = StringField('email address', validators=[DataRequired()])
-    review = StringField('Review', validators=[DataRequired()])
+    review = StringField('Review', validators=[DataRequired(), Length(max=4000)], widget=TextArea())
     stars = IntegerField('Star Rating', validators=[DataRequired()])
     game_list = QuerySelectField(
         'Game',

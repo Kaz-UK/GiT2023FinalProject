@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+  <!-- Insert HTML local to this page -->
+
+    <div class='container-sm' style="width:50%">
+        <h2>Write a Review</h2>
+            <p>You are currently logged in as: {{ current_user.email }}</p>
+            <p>Thank you {{ current_user.first_name }} for writing a review of one of our games. Your review will appear on our website identified by your first name.</p>
+            <p>You can delete a review via your account pages.</p>
+            <br>
+        <form method='POST' action=''>
+        <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
+        {{ form.csrf_token }}
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-10">{{ form.review.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.review (class_="form-control", rows=4)}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-10">{{ form.stars.label(class_="form-label")}}</div>
+                <div class="col-md-10">{{ form.stars(class_="form-control", size=32)}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-10">{{ form.game_list.label (class_="form-label") }}</div>
+                <div class="col-md-10">{{ form.game_list}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "mb-3">
+                <div class="col-md-2">{{ form.submit(class_="btn btn-primary mb-3") }}</div>
+            </div>
+        </div>
+        </form>
+    </div>
+
+  <!-- Do not type below this line -->
+
+{% block footer_content %}
+{% endblock %}
+
+{% endblock %}

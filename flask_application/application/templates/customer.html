@@ -3,27 +3,60 @@
 
     <!-- Insert HTML local to this page -->
 
-    <!-- Start general about us text -->
-
     <h2>Account Details: {{ current_user.first_name }} {{ current_user.last_name }}</h2>
-
+    {% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+    {% endfor %}
+    {% if current_user.email == "admin@kafv.co.uk" %}
     <br>
-
-    <p>Welcome {{ current_user.first_name }} <br><br> <a class="nav-link" href="{{ url_for('logout') }}">Logout</a></p>
+    <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('admin') }}">Admin Dashboard</a></button>
     <br>
-
-
+    {% endif %}
+    <br>
+    <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('add_booking') }}">Make a Booking</a></button>
+    <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('add_review') }}">Write a Review</a></button>
+    <button type="button" class="btn btn-primary"><a class="nav-link" href="">Update Details (Coming Soon)</a></button>
+    <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></button>
+    <br>
+    <br>
+    <br>
+    <h3>Your Bookings</h3>
+    {% if bookings %}
+            <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" style="width:20%">Booking Date</th>
+                <th scope="col" style="width:20%">Booking Session</th>
+                <th scope="col" style="width:40%">Game Reserved</th>
+                <th scope="col" style="width:20%"></th>
+            </tr>
+        </thead>
+        {% for booking in bookings %}
+        <tbody>
+            <tr>
+                <td scope="row">{{booking.date}}</td>
+                <td scope="row">{{booking.session_type}}</td>
+                <td scope="row">{{booking.game_name}}</td>
+                <td scope="row" align="right"><button type="button" class="btn btn-outline-danger"><a class="nav-link" href="{{ url_for('delete_booking', booking_id=booking.booking_id) }}">Cancel Session</a></button></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>You have no bookings</p>
+    {% endif %}
+    <br>
+    <br>
     <h3>Your Reviews</h3>
-    {{ message }}
-
-
-        <table class="table">
+    {% if reviews %}
+            <table class="table">
         <thead>
             <tr>
                 <th scope="col" style="width:20%">Game Name</th>
-                <th scope="col" style="width:60%">Review</th>
+                <th scope="col" style="width:40%">Review</th>
                 <th scope="col" style="width:10%">Stars</th>
                 <th scope="col" style="width:15%">Review Date</th>
+                <th scope="col" style="width:15%"></th>
             </tr>
         </thead>
         {% for rev in reviews %}
@@ -65,11 +98,16 @@
                     {% endif %}
                 </td>
                 <td scope="row">{{rev.review_date}}</td>
+                <td scope="row" align="right">
+                    <button type="button" class="btn btn-outline-danger"><a class="nav-link" href="{{ url_for('delete_review', review_id=rev.review_id) }}">Delete Review</a></button>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
+    {% else %}
+    <p>You have no reviews</p>
+    {% endif %}
     <br>
     <br>
 

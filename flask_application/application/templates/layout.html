@@ -32,7 +32,7 @@
             <!-- Start navigation logo -->
             <!-- <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Board game cafe" width="30" height="24"> -->
             <!-- End navigation logo -->
-            <a class="navbar-brand" href="{{ url_for('home') }}">Roll With It!</a>
+            <a class="navbar-brand" href="{{ url_for('home') }}">Boardgame Cafe</a>
                 <!-- Start hamburger menu (only shows when screen is small) -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -41,18 +41,29 @@
                 <div class="collapse navbar-collapse" id="navbarToggler">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('add_new_booking') }}">Booking</a>
+                    <a class="nav-link" href="{{ url_for('add_booking') }}">Book</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('show_games') }}">Games</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('about') }}">About Us</a>
-                </li>
+                    <a class="nav-link" href="{{ url_for('menu') }}">Food & Drink</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('add_new_review') }}">Write a Review</a>
+                    <a class="nav-link" href="{{ url_for('about') }}">About Us</a>
                 </li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('customer') }}">Account</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                </li>
+                {% endif %}
             </ul>
             <!-- Start navigation search bar -->
             <form method="POST" action="{{ url_for('search') }}" class="d-flex" role="search">
@@ -67,7 +78,7 @@
     <!-- End navigation bar -->
 
     <!-- Start responsive banner image -->
-    <img src="{{ url_for('static', filename='images/banner.jpg') }}" class="img-fluid" alt="Game image">
+    <img src="{{ url_for('static', filename='images/banner.jpg') }}" class="img-fluid" alt="Game image" width="100%">
     <!-- End responsive banner image -->
 
     <!-- Creates a fluid container for all webpages in the project (note font control at end of class -->
@@ -90,7 +101,7 @@
                 Roll With It!<br>
                 Leeds Dock<br>
                 Leeds<br>
-                LS10 1QG<br>
+                LS10 1QG
             </div>
         <div class="ms-3 p-3 col-lg-3 footer_text">
             <div class="footer_header">Opening Times</div>
@@ -100,7 +111,7 @@
             0452-494-5745<br>
             <!-- Insert Google Font Material Icon for Mail -->
             <span class="material-icons">mail</span>
-            customerservice@rollwithit.co.uk<br>
+            contact@ourboardgamecafe.co.uk<br>
         </div>
         <div class="me-3 p-3 col footer_text" align="right">
             <!-- Empty column -->

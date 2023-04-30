@@ -14,21 +14,21 @@ from wtforms.validators import DataRequired
 class BookingForm(FlaskForm):
 
     game_list = QuerySelectField(
-        'Stock',
+        'Reserve a game (optional)',
         query_factory=lambda: Game.query,
         allow_blank=False,
         get_label='game_name'
     )
     session_date_list = QuerySelectField(
-        'Cafesession',
+        'Date',
         query_factory=lambda: Cafesession.query,
         allow_blank=False,
         get_label='session_date'
     )
 
     session_list = SelectField(
-        'Cafesession', choices=[('Lunchtime', 'Lunchtime'), ('Afternoon', 'Afternoon'), ('Evening', 'Evening')]
+        'Session', choices=[('Lunchtime', 'Lunchtime'), ('Afternoon', 'Afternoon'), ('Evening', 'Evening')]
     )
     email = StringField('Customer email', validators=[DataRequired()])
 
-    submit = SubmitField('Add Booking')
+    submit = SubmitField('Book')
