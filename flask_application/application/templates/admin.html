@@ -3,16 +3,15 @@
 
     <!-- Insert HTML local to this page -->
 
-    <!-- Start general about us text -->
     <h2>Admin Dashboard</h2>
     {% for message in get_flashed_messages() %}
     <p>{{ message }}</p>
     {% endfor %}
     <br>
-    <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('get_bookings') }}">Bookings</a></button>
+    <button type="button" class="btn btn-primary"><a class="nav-link" href="">Bookings (Coming Soon)</a></button>
     <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('add_session') }}">Add Session</a></button>
     <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('add_new_game') }}">Add Game</a></button>
-    <button type="button" class="btn btn-primary"><a class="nav-link" href="">Search Customer Details (Coming Soom)</a></button>
+    <button type="button" class="btn btn-primary"><a class="nav-link" href="">Search Customer Details (Coming Soon)</a></button>
     <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></button>
     <br>
     <br>
@@ -41,8 +40,6 @@
         {% endfor %}
     </tbody>
     </table>
-
-
 
     <!-- Do not type below this line -->
 

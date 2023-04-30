@@ -16,7 +16,7 @@
             <div class="card text-center" style="width: 18rem;">
                 <img class="card-img-top"
                      src="{{ url_for('static', filename='images/' + col.game_id|string + '.jpg') }}" height="100"
-                     alt="Card image cap">
+                     alt="Image of {{col.game_name}}">
                 <div class="card-body">
                     <h5 class="card-title">{{col.game_name}}</h5>
                         <p class="card-text">{{col.num_of_players}} players</p>

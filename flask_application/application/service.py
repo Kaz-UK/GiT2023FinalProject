@@ -111,12 +111,16 @@ def get_reviews_by_game_id(game_id):
     return db.session.query(Review).filter_by(game_id=game_id).order_by(Review.review_date.desc()).all()
 
 
-# BOOKING - CAFESESSION ID BY DATE AND SESSION (VICKI)
-def get_cafesession_by_date(session_date):
-    if not session_date:
-        return db.session.query(Cafesession).filter_by(session_date=session_date).first()
-    else:
-        return None
+# BOOKING - GET CAFESESSION DETAILS (KAREN)
+def get_cafesession_details(session_date):
+    return db.session.query(Cafesession).filter_by(session_date=session_date).all()
+
+
+# BOOKING - UPDATE TABLES (KAREN)
+def update_table_count(session_id):
+    session_info = db.session.query(Cafesession).filter_by(session_id=session_id).first()
+    session_info.table_count -= 1
+    db.session.commit()
 
 
 # NAV BAR SEARCH FUNCTION (KAREN)
@@ -173,10 +177,14 @@ def get_bookings(customer_id):
         return None
     for row in booking_details:
         session_details = db.session.query(Cafesession).filter_by(session_id=row.session_id).first()
-        stock_type = db.session.query(Stock).filter_by(stock_id=row.stock_id).first()
-        game = db.session.query(Game).filter_by(game_id=stock_type.game_id).first()
-        booking_detail = {"date": session_details.session_date, "session_type": session_details.session_type,
-                          "game_name": game.game_name, "booking_id": row.booking_id}
+        if row.stock_id is None:
+            booking_detail = {"date": session_details.session_date, "session_type": session_details.session_type,
+                              "game_name": "No game selected", "booking_id": row.booking_id}
+        else:
+            stock_type = db.session.query(Stock).filter_by(stock_id=row.stock_id).first()
+            game = db.session.query(Game).filter_by(game_id=stock_type.game_id).first()
+            booking_detail = {"date": session_details.session_date, "session_type": session_details.session_type,
+                              "game_name": game.game_name, "booking_id": row.booking_id}
         booking_list.append(booking_detail)
     return booking_list
 
@@ -220,33 +228,60 @@ def delete_review(review_id):
     db.session.commit()
 
 
-# DELETE BOOKING - GET DETAILS (KAREN)
+# DELETE BOOKING - GET BOOKING DETAILS (KAREN)
 def get_booking_by_id(booking_id):
     return db.session.query(Booking).filter_by(booking_id=booking_id).first_or_404()
 
 
+# DELETE BOOKING - GET SESSION DETAILS (KAREN)
+def get_session_by_id(session_id):
+    return db.session.query(Cafesession).filter_by(session_id=session_id).first_or_404()
+
+
 # DELETE BOOKING (KAREN)
-def delete_booking(booking_id):
+def delete_booking(booking_id, session_id):
+    session_info = db.session.query(Cafesession).filter_by(session_id=session_id).first()
+    session_info.table_count += 1
     db.session.delete(booking_id)
     db.session.commit()
 
+
 # def get_cafesession_by_type(session_type):
 #     return db.session.query(Cafesession).filter_by(session_type=session_type).first()
-
-
+#
+#
 # # GET CAFESESSION BY SESSION ID
 # def get_cafe_session_by_session_id(cafesession):
 #     return db.session.query(Cafesession).filter_by(cafesession=cafesession).order_by(func.max(Cafesession.session_id))
-
-
+#
+#
 # # CAFESESSION ID BY DATE AND SESSION
 # def get_cafesession_by_date_and_type(session_date, session_type):
 #     return db.session.query(Cafesession).filter_by(session_date=session_date, session_type=session_type).first()
-
-
+#
+#
 # # CUSTOMERS BY ID*
 # def get_customer_by_id(customer_id):
 #     if customer_id > 0:
 #         return db.session.query(Customer).filter_by(customer_id=customer_id).first()
+#     else:
+#         return None
+#
+#
+# # BOOKING - CAFESESSION ID BY DATE AND SESSION (VICKI)
+# def get_cafesession_by_date(session_date):
+#     if not session_date:
+#         return db.session.query(Cafesession).filter_by(session_date=session_date).first()
+#     else:
+#         return None
+#
+#
+# # BOOKING - GET CAFESESSION DETAILS (KAREN)
+# def get_cafesession_details(session_date):
+#     booking_date = db.session.query(Cafesession).filter_by(session_date=session_date).all()
+#     for session_info in booking_date:
+#         if session_info.session_type == session_type:
+#             booking_session_id = session_info.session_id
+#             return booking_session_id
 #     else:
 #         return None

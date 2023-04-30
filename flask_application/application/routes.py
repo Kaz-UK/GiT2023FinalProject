@@ -36,10 +36,16 @@ def about():
     return render_template('about.html', title="About Us")
 
 
-# ABOUT US PAGE
+# FOOD & DRINK PAGE
 @app.route('/food-and-drink', methods=['GET'])
 def menu():
     return render_template('food-and-drink.html', title="Food and Drink")
+
+
+# ERROR PAGE
+@app.route('/error', methods=['GET'])
+def error():
+    return render_template('error.html', title="Error")
 
 
 # CREATES ERROR HANDLER - 401 UNAUTHORISED
@@ -116,7 +122,6 @@ def show_game_details(game_name):
 # ADD NEW CUSTOMER (KAREN)
 @app.route('/register', methods=['GET','POST'])
 def register():
-    error = ""
     form = RegistrationForm()
     if request.method == 'POST':
         form = RegistrationForm(request.form)
@@ -127,8 +132,9 @@ def register():
             if existing_customer is None:
                 # Password is hashed for security
                 hashed_password = generate_password_hash(form.customer_password.data, "sha256")
-                user = Customer(first_name=form.first_name.data, last_name=form.last_name.data, email=email, phone_number=form.phone_number.data,
-                                    account_status="Active", customer_password=hashed_password, join_date=join_date)
+                user = Customer(first_name=form.first_name.data, last_name=form.last_name.data, email=email,
+                                phone_number=form.phone_number.data, account_status="Active",
+                                customer_password=hashed_password, join_date=join_date)
                 service.add_new_customer(user)
                 login_user(user)
                 return redirect(url_for('customer'))
@@ -138,7 +144,7 @@ def register():
         else:
             flash("There was an error with your registration")
             return redirect(url_for('register'))
-    return render_template('registration.html', form=form, message=error, title="Register")
+    return render_template('registration.html', form=form, title="Register")
 
 
 # LOGIN (KAREN)
@@ -172,101 +178,43 @@ def logout():
     return render_template('home.html')
 
 
-# # ADD A NEW BOOKING USING WTF FORMS (VICKI)
-# @app.route('/new_booking', methods=['GET', 'POST'])
-# def add_new_booking():
-#     error = ""
-#     form = BookingForm()
-#     if request.method == 'POST':
-#         form = BookingForm(request.form)
-#         game = form.game_list.data
-#         session_date = form.session_date_list.data
-#         session_type = form.session_list.data
-#         customer = form.email.data
-#         if not session_date:
-#             error = "Please select an available date"
-#         else:
-#             number_of_tables = 1
-#             # PULLS IN GAME ID FROM GAMES LIST
-#             service.show_game_details(game)
-#             # PULLS IN CUSTOMER ID FROM EMAIL
-#             cust = show_customer_details(customer)
-#             # PULLS IN SESSION ID
-#             get_cafesession_by_date(session_date)
-#             # ADDS THE BOOKING
-#             booking = Booking(stock_id=game.game_id, session_id=session_date.session_id, customer_id=cust, number_of_tables=number_of_tables)
-#             service.add_new_booking(booking)
-#             bookings = service.get_all_bookings()
-#             return render_template('booking.html', bookings=bookings, stock_id=game.game_id, session_id=session_date.session_id, customer_id=cust, number_of_tables=number_of_tables, message=error)
-#     return render_template('new_booking_form.html', game=Game, form=form, message=error)
-
-
-# GET ALL CAFESESSION BY SESSION DATE AND SESSION TYPE - USED IN BOOKING WITH WTF FORMS (VICKI)
-@app.route('/cafesession/<session_date>', methods=['GET'])
-def get_cafesession_by_date(session_date):
-    error = ""
-    cafesessions = service.get_cafesession_by_date(session_date)
-    if not cafesessions:
-        error = "There are no sessions to display"
-    else:
-        return jsonify(cafesessions)
-
-
-# GET CUSTOMER ID FROM EMAIL - USED IN REVIEW & BOOKING FORM (VICKI)*
-@app.route('/customer/<email>', methods=['GET'])
-def show_customer_details(email):
-    error = ""
-    customer = service.get_customer_by_email(email)
-    if not customer:
-        error = "There is no one with the email " + email
-    else:
-        for e in customer.email:
-            return str(customer.customer_id)
-
-
 # ADD A NEW BOOKING (VICKI/KAREN)
 @app.route('/customer/booking', methods=['GET', 'POST'])
 def add_booking():
-    error = ""
     form = BookingForm()
     if request.method == 'POST':
         form = BookingForm(request.form)
+        session_information = form.session_date_list.data
         game = form.game_list.data
-        session_date = form.session_date_list.data
-        session_type = form.session_list.data
-        customer = form.email.data
-        if not session_date:
-            error = "Please select an available date"
-        else:
-            number_of_tables = 1
-            # PULLS IN GAME ID FROM GAMES LIST
-            service.show_game_details(game)
-            # PULLS IN CUSTOMER ID FROM EMAIL
-            cust = show_customer_details(customer)
-            # PULLS IN SESSION ID
-            get_cafesession_by_date(session_date)
-            # ADDS THE BOOKING
-            booking = Booking(stock_id=game.game_id, session_id=session_date.session_id, customer_id=cust, number_of_tables=number_of_tables)
-            service.add_new_booking(booking)
-            bookings = service.get_all_bookings()
-            return redirect(url_for('booking_confirmation'))
-    return render_template('booking.html', game=Game, form=form, message=error, title="Book")
+        if form.validate_on_submit():
+            cust = service.get_customer_by_email(form.email.data)
+            if cust:
+                if session_information.table_count == 0:
+                    flash("Sorry, this session is fully booked.")
+                    return redirect(url_for('add_booking'))
+                if game is None:
+                    booking = Booking(session_id=session_information.session_id, customer_id=cust.customer_id,
+                                      number_of_tables=1)
+                else:
+                    booking = Booking(stock_id=game.game_id, session_id=session_information.session_id,
+                                      customer_id=cust.customer_id, number_of_tables=1)
+                try:
+                    service.add_new_booking(booking)
+                    service.update_table_count(session_information.session_id)
+                    return redirect(url_for('booking_confirmation'))
+                except:
+                    flash("There was a problem with your booking.")
+                    return redirect(url_for('add_booking'))
+            else:
+                flash("Your email is not in our database. Please sign up before booking.")
+                return redirect(url_for('add_booking'))
+    return render_template('booking.html', form=form, message=error, title="Book")
 
 
 # BOOKING CONFIRMATION
 @app.route('/customer/booking/booking-confirmation', methods=['GET'])
 def booking_confirmation():
     return render_template('booking-confirmation.html', title="Booking Confirmed")
-
-
-# # GET GAME ID BY GAME NAME - USED IN REVIEW & BOOKING FORM (VICKI)
-# @app.route('/review_game/<game_name>', methods=['GET'])
-# def display_game_details(game_name):
-#     error = ""
-#     game = service.get_game_by_name(game_name)
-#     if not game:
-#         error = "There is no game called " + game_name
-#     return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
 
 
 # CUSTOMER DASHBOARD (KAREN)
@@ -318,11 +266,14 @@ def add_review():
 def delete_booking(booking_id):
     delete_booking_id = service.get_booking_by_id(booking_id)
     if current_user.customer_id == delete_booking_id.customer_id:
+        session_info = service.get_session_by_id(delete_booking_id.session_id)
         try:
-            service.delete_booking(delete_booking_id)
+            # service.add_table_count(session_info.session_id)
+            service.delete_booking(delete_booking_id, session_info.session_id)
             return redirect(url_for('customer'))
         except:
-            return redirect(url_for('405'))
+            flash("There was an error deleting your booking. If this persists, please contact us.")
+            return redirect(url_for('error'))
     else:
         return render_template('401.html', title="Unauthorised")
 
@@ -388,7 +339,8 @@ def add_new_game():
             game_description = form.game_description.data
             gameplay = form.gameplay.data
             if len(game_name) == 0 or not num_of_players or not min_age or not duration_of_play_time:
-                error = "Please supply all game details"
+                flash("Game added successfully")
+                redirect(url_for('add_new_game'))
             else:
                 game = Game(game_name=game_name, num_of_players=num_of_players,
                             min_age=min_age, duration_of_play_time=duration_of_play_time, gameplay=gameplay,
@@ -403,12 +355,12 @@ def add_new_game():
         return render_template('401.html', title="Unauthorised")
 
 
-# ADD NEW GAME FORM (AMY)
+# ADD BOOKINGS (VICKI)
 @app.route('/admin/bookings', methods=['GET'])
 @login_required
 def get_bookings():
     if current_user.email == "admin@kafv.co.uk":
-        return render_template('admin.html', results=game_stock, title="Admin Dashboard")
+        return render_template('bookings.html', title="Admin Dashboard")
     else:
         return render_template('401.html', title="Unauthorised")
 
@@ -422,8 +374,8 @@ def get_bookings():
 #         error = "There are no reviews to display"
 #     #return render_template('customer.html', reviews=reviews, message=error, title="All Reviews")
 #     return jsonify(reviews)
-
-
+#
+#
 # # SEARCH ALL BOOKINGS - GENERAL QUERY (VICKI)*
 # @app.route('/bookings', methods=['GET'])
 # def show_bookings():
@@ -433,8 +385,8 @@ def get_bookings():
 #         error = "There are no bookings to display"
 #     #return render_template('customer.html', bookings=bookings, message=error, title="All Reviews")
 #     return jsonify(bookings)
-
-
+#
+#
 # # SEARCH ALL CAFESESSIONS - GENERAL QUERY (VICKI)*
 # @app.route('/cafesessions', methods=['GET'])
 # def show_cafesessions():
@@ -444,8 +396,8 @@ def get_bookings():
 #         error = "There are no cafesessions to display"
 #     #return render_template('customer.html', cafesessions=cafesessions, message=error, title="All Reviews")
 #     return jsonify(cafesessions)
-
-
+#
+#
 # # SEARCH ALL STOCK - GENERAL QUERY (VICKI)*
 # @app.route('/stock', methods=['GET'])
 # def show_stock():
@@ -455,8 +407,8 @@ def get_bookings():
 #         error = "There is no stock to display"
 #     # return render_template('customer.html', stock=stock, message=error, title="All Reviews")
 #     return jsonify(stock)
-
-
+#
+#
 # GET GAME BY GAME NAME (USED IN REVIEW) - THIS DOESN'T SEEM TO BE IN USE
 # @app.route('/games/<game_name>', methods=['GET'])
 # def show_game_details(game_name):
@@ -466,8 +418,8 @@ def get_bookings():
 #         error = "There is no game called " + game_name
 #     return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)
 #     # return jsonify(game)
-
-
+#
+#
 # # SEARCH ALL CUSTOMER-GENERAL QUERY (VICKI)*
 # @app.route('/customers', methods=['GET'])
 # def show_customers():
@@ -475,8 +427,8 @@ def get_bookings():
 #     if len(customers) == 0:
 #         error = "There are no customers to display"
 #     return jsonify(customers)
-
-
+#
+#
 # # SEARCH CUSTOMERS
 # @app.route('/customers/<int:customer_id>', methods=['GET'])
 # def show_customer(customer_id):
@@ -503,3 +455,36 @@ def get_bookings():
 # #     else:
 # #         print(customer.first_name, customer.last_name)
 # #     return jsonify(customer)
+#
+#
+# # GET ALL CAFESESSION BY SESSION DATE AND SESSION TYPE - USED IN BOOKING WITH WTF FORMS (VICKI)
+# @app.route('/cafesession/<session_date>', methods=['GET'])
+# def get_cafesession_by_date(session_date):
+#     error = ""
+#     cafesessions = service.get_cafesession_by_date(session_date)
+#     if not cafesessions:
+#         error = "There are no sessions to display"
+#     else:
+#         return jsonify(cafesessions)
+#
+#
+# # GET CUSTOMER ID FROM EMAIL - USED IN REVIEW & BOOKING FORM (VICKI)*
+# @app.route('/customer/<email>', methods=['GET'])
+# def show_customer_details(email):
+#     error = ""
+#     customer = service.get_customer_by_email(email)
+#     if not customer:
+#         error = "There is no one with the email " + email
+#     else:
+#         for e in customer.email:
+#             return str(customer.customer_id)
+#
+#
+# # GET GAME ID BY GAME NAME - USED IN REVIEW & BOOKING FORM (VICKI)
+# @app.route('/review_game/<game_name>', methods=['GET'])
+# def display_game_details(game_name):
+#     error = ""
+#     game = service.get_game_by_name(game_name)
+#     if not game:
+#         error = "There is no game called " + game_name
+#     return render_template('game.html', game=game, message=error, game_name=game_name, title=game.game_name)

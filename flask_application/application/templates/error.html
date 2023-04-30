@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+    <!-- Insert HTML local to this page -->
+
+    <h2>There was an error with your request</h2>
+    {% for message in get_flashed_messages() %}
+    <br>
+    <p>{{ message }}</p>
+    {% endfor %}
+    <p>Please contact us so we can resolve this problem.</p>
+
+
+
+
+    <!-- Do not type below this line -->
+
+{% block footer_content %}
+{% endblock %}
+
+{% endblock %}

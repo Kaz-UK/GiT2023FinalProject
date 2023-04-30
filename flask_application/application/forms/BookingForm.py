@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, SelectField, DateField
+from wtforms import StringField, SubmitField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 
@@ -13,22 +13,20 @@ from wtforms.validators import DataRequired
 
 class BookingForm(FlaskForm):
 
+    session_date_list = QuerySelectField(
+        'Date/Session',
+        query_factory=lambda: Cafesession.query,
+        allow_blank=False,
+        get_label=lambda s: '%s %s (Available Tables: %s)' % (s.session_date, s.session_type, s.table_count)
+    )
+
     game_list = QuerySelectField(
         'Reserve a game (optional)',
         query_factory=lambda: Game.query,
-        allow_blank=False,
+        allow_blank=True,
         get_label='game_name'
     )
-    session_date_list = QuerySelectField(
-        'Date',
-        query_factory=lambda: Cafesession.query,
-        allow_blank=False,
-        get_label='session_date'
-    )
 
-    session_list = SelectField(
-        'Session', choices=[('Lunchtime', 'Lunchtime'), ('Afternoon', 'Afternoon'), ('Evening', 'Evening')]
-    )
     email = StringField('Customer email', validators=[DataRequired()])
 
     submit = SubmitField('Book')

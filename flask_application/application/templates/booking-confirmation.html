@@ -4,7 +4,11 @@
     <!-- Insert HTML local to this page -->
 
     <h2>Thank you for booking a table</h2>
+    {% if current_user.is_authenticated %}
+    <p>If you need to cancel your booking, please go to your <a href="{{ url_for('customer') }}">Account</a> or contact us.</p>
+    {% else %}
     <p>If you need to cancel your booking, please <a href="{{ url_for('login') }}">Login</a> or contact us.</p>
+    {% endif %}
 
 
 
