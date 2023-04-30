@@ -22,7 +22,7 @@ class BookingForm(FlaskForm):
 
     game_list = QuerySelectField(
         'Reserve a game (optional)',
-        query_factory=lambda: Game.query,
+        query_factory=lambda: Game.query.order_by(Game.game_name),
         allow_blank=True,
         get_label='game_name'
     )
