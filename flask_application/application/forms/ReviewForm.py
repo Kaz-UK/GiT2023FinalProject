@@ -13,7 +13,7 @@ class ReviewForm(FlaskForm):
     stars = IntegerField('Star Rating', validators=[DataRequired()])
     game_list = QuerySelectField(
         'Game',
-        query_factory=lambda: Game.query,
+        query_factory=lambda: Game.query.order_by(Game.game_name),
         allow_blank=False,
         get_label='game_name'
     )

@@ -142,7 +142,7 @@ def register():
                 flash("An account with this email already exists")
                 return redirect(url_for('register'))
         else:
-            flash("There was an error with your registration")
+            flash("There was an error with your registration, please ensure your passwords match")
             return redirect(url_for('register'))
     return render_template('registration.html', form=form, title="Register")
 
@@ -355,7 +355,7 @@ def add_new_game():
         return render_template('401.html', title="Unauthorised")
 
 
-# ADD BOOKINGS (VICKI)
+# ADMIN - VIEW BOOKINGS (VICKI)
 @app.route('/admin/bookings', methods=['GET'])
 @login_required
 def get_bookings():

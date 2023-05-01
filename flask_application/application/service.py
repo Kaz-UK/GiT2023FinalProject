@@ -8,6 +8,7 @@ from application.models.game import Game
 from application.models.review import Review
 from application.models.stock import Stock
 import datetime
+import operator
 from application import db
 
 
@@ -160,6 +161,7 @@ def get_reviews(customer_id):
         review_detail = {"review": row.review, "stars": row.stars, "review_date": row.review_date,
                          "game": game_name, "review_id": row.review_id}
         review_list.append(review_detail)
+    review_list.sort(key=operator.itemgetter("game"))
     return review_list
 
 
@@ -179,13 +181,16 @@ def get_bookings(customer_id):
         session_details = db.session.query(Cafesession).filter_by(session_id=row.session_id).first()
         if row.stock_id is None:
             booking_detail = {"date": session_details.session_date, "session_type": session_details.session_type,
-                              "game_name": "No game selected", "booking_id": row.booking_id}
+                              "game_name": "No game selected", "table_booking": row.number_of_tables,
+                              "booking_id": row.booking_id}
         else:
             stock_type = db.session.query(Stock).filter_by(stock_id=row.stock_id).first()
             game = db.session.query(Game).filter_by(game_id=stock_type.game_id).first()
             booking_detail = {"date": session_details.session_date, "session_type": session_details.session_type,
-                              "game_name": game.game_name, "booking_id": row.booking_id}
+                              "game_name": game.game_name, "table_booking": row.number_of_tables,
+                              "booking_id": row.booking_id}
         booking_list.append(booking_detail)
+    booking_list.sort(key=operator.itemgetter("date"))
     return booking_list
 
 

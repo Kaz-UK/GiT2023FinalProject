@@ -25,9 +25,10 @@
             <table class="table">
         <thead>
             <tr>
-                <th scope="col" style="width:20%">Booking Date</th>
+                <th scope="col" style="width:15%">Booking Date</th>
                 <th scope="col" style="width:20%">Booking Session</th>
-                <th scope="col" style="width:40%">Game Reserved</th>
+                <th scope="col" style="width:20%">Table(s) Reserved</th>
+                <th scope="col" style="width:25%">Game Reserved</th>
                 <th scope="col" style="width:20%"></th>
             </tr>
         </thead>
@@ -36,6 +37,7 @@
             <tr>
                 <td scope="row">{{booking.date}}</td>
                 <td scope="row">{{booking.session_type}}</td>
+                <td scope="row">{{booking.table_booking}}</td>
                 <td scope="row">{{booking.game_name}}</td>
                 <td scope="row" align="right"><button type="button" class="btn btn-outline-danger"><a class="nav-link" href="{{ url_for('delete_booking', booking_id=booking.booking_id) }}">Cancel Session</a></button></td>
             </tr>
