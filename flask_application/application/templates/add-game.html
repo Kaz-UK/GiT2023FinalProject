@@ -4,6 +4,13 @@
   <!-- Insert HTML local to this page -->
 
     <div class='container-sm' style="width:50%">
+    <!-- System message -->
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning" role="alert">
+    {{ message }}
+    </div>
+    {% endfor %}
+    <!-- End system message -->
     <h2>Add Game</h2><br>
     <form method='POST' action=''>
         <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->

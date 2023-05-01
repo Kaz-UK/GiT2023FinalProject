@@ -4,6 +4,13 @@
   <!-- Insert HTML local to this page -->
 
     <div class='container-sm' style="width:50%">
+        <!-- System message -->
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning" role="alert">
+        {{ message }}
+        </div>
+        {% endfor %}
+        <!-- End system message -->
         <h2>Write a Review</h2>
             <p>You are currently logged in as: {{ current_user.email }}</p>
             <p>Thank you {{ current_user.first_name }} for writing a review of one of our games. Your review will appear on our website identified by your first name.</p>
@@ -27,7 +34,7 @@
         <div class="row">
             <div class = "mb-3">
                 <div class="col-md-10">{{ form.game_list.label (class_="form-label") }}</div>
-                <div class="col-md-10">{{ form.game_list}}</div>
+                <div class="col-md-10">{{ form.game_list (class_="form-control", size=4) }}</div>
             </div>
         </div>
         <div class="row">

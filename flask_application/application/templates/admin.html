@@ -4,9 +4,13 @@
     <!-- Insert HTML local to this page -->
 
     <h2>Admin Dashboard</h2>
+    <!-- System message -->
     {% for message in get_flashed_messages() %}
-    <p>{{ message }}</p>
+    <div class="alert alert-warning" role="alert">
+    {{ message }}
+    </div>
     {% endfor %}
+    <!-- End system message -->
     <br>
     <button type="button" class="btn btn-primary"><a class="nav-link" href="">Bookings (Coming Soon)</a></button>
     <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('add_session') }}">Add Session</a></button>

@@ -4,9 +4,13 @@
     <!-- Insert HTML local to this page -->
 
     <h2>Account Details: {{ current_user.first_name }} {{ current_user.last_name }}</h2>
+    <!-- System message -->
     {% for message in get_flashed_messages() %}
-    <p>{{ message }}</p>
+    <div class="alert alert-warning" role="alert">
+    {{ message }}
+    </div>
     {% endfor %}
+    <!-- End system message -->
     {% if current_user.email == "admin@kafv.co.uk" %}
     <br>
     <button type="button" class="btn btn-primary"><a class="nav-link" href="{{ url_for('admin') }}">Admin Dashboard</a></button>

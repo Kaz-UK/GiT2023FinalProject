@@ -4,10 +4,13 @@
     <!-- Insert HTML local to this page -->
 
     <div class='container-sm' style="width:50%">
+        <!-- System message -->
         {% for message in get_flashed_messages() %}
-        <br>
-        <p>{{ message }}</p>
+        <div class="alert alert-warning" role="alert">
+        {{ message }}
+        </div>
         {% endfor %}
+        <!-- End system message -->
         <h2> Book A Table</h2>
     <form method='POST' action=''>
         <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
@@ -15,13 +18,13 @@
         <div class="row">
             <div class = "mb-3">
                 <div class="col-md-2">{{ form.session_date_list.label (class_="form-label") }}</div>
-                <div class="col-md-10">{{ form.session_date_list}}</div>
+                <div class="col-md-10">{{ form.session_date_list (class_="form-control", size=8) }}</div>
             </div>
         </div>
         <div class="row">
             <div class = "mb-3">
                 <div class="col-md-10">{{ form.game_list.label (class_="form-label") }}</div>
-                <div class="col-md-10">{{ form.game_list }}</div>
+                <div class="col-md-10">{{ form.game_list (class_="form-control", size=4) }}</div>
             </div>
         </div>
         <div class="row">

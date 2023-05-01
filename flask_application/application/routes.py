@@ -137,6 +137,7 @@ def register():
                                 customer_password=hashed_password, join_date=join_date)
                 service.add_new_customer(user)
                 login_user(user)
+                flash("Sign up successful. Welcome to Roll With It!")
                 return redirect(url_for('customer'))
             else:
                 flash("An account with this email already exists")
