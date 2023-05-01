@@ -24,7 +24,7 @@ body {
 }
 
 /* Bootstrap buttons */
-.btn {
+.btn, .btn-primary, .btn-primary:focus, .btn-success:hover, .btn-success:active, .btn-success:focus {
     font-family: 'DynaPuff', cursive, sans-serif;
     background-color: #FAEC21!important;
     color: black!important;
