@@ -257,7 +257,10 @@ def add_review():
                 review_details = Review(review=review, stars=stars, review_date=review_date,
                                         customer_id=current_user.customer_id, game_id=game.game_id)
                 service.add_new_review(review_details)
-            return redirect(url_for('customer'))
+                return redirect(url_for('customer'))
+            else:
+                flash("There was an error submitting your review")
+                return redirect((url_for('add_review')))
         return render_template('add-review.html', message=error, form=form, title="Add Review")
 
 
