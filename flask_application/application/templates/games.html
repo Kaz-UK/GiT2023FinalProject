@@ -14,9 +14,9 @@
         {% for col in row %}
         <div class="col-sm">
             <div class="card text-center" style="width: 18rem;">
-                <img class="card-img-top"
+                <a href="{{ url_for('show_game_details', game_name=col.game_name) }}"><img class="card-img-top"
                      src="{{ url_for('static', filename='images/' + col.game_id|string + '.jpg') }}" height="100"
-                     alt="Image of {{col.game_name}}">
+                                                                                           alt="Image of {{col.game_name}}"></a>
                 <div class="card-body">
                     <h5 class="card-title">{{col.game_name}}</h5>
                         <p class="card-text">{{col.num_of_players}} players</p>

@@ -12,6 +12,11 @@
         {% endfor %}
         <!-- End system message -->
         <h2> Book A Table</h2>
+        <p>We have three daily sessions that you can book.<br>
+            Lunchtime: 11am - 1pm<br>
+            Afternoon: 2pm - 5pm<br>
+            Lunchtime: 6pm - 10pm<br>
+        </p>
     <form method='POST' action=''>
         <!-- provides CRSF protection, alongside secret key. Use on all POST forms -->
         {{ form.csrf_token }}
