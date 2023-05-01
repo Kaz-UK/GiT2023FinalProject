@@ -5,69 +5,66 @@
 
     <!-- Start welcome -->
 
-            <div class="card">
-            <div class="card-body">
+    <div class="card">
+        <div class="card-body">
             <h2>Welcome to Roll With It!</h2>
-            <p>We offer a warm and friendly environment where you can enjoy a boardgame or two with your friends and family! Book onto one of our sessions and bring your own game or reserve one from our collection.</p>
-            </div>
-            </div>
+            <p>We are the home of boardgames in Leeds! Our friendly cafe provides the perfect space to relax with friends.
+                Book onto one of our sessions and bring your own game or reserve one from our collection. Not sure what to play or unsure of the rules? Ask us! Our team are always happy to assist (and will join in to help you get started!)</p>
+                <p>Amy, Faye, Karen and Vicki look forward to welcoming you soon!</p>
+        </div>
+    </div>
 
-        <!-- End welcome -->
+    <!-- End welcome -->
     <br>
     <br>
-
-
-
-
     <!-- Image layout -->
+
     <div class="container text-center">
         <div class="row">
             <div class="col-sm">
                 <img class="home_images" src="{{ url_for('static', filename='images/food_home.jpg') }}" class="rounded" alt="Generic image of a dice game. Photo by Sarah Pflug from Burst" height="170">
-                <br><h4>Eat</h4>
+                <br><br><h4>Eat</h4>
             </div>
             <div class="col-sm">
                 <img class="home_images" src="{{ url_for('static', filename='images/coffee_home.jpg') }}" class="rounded" alt="Generic image of a dice game. Photo by Sarah Pflug from Burst" height="170">
-                <br><h4>Drink</h4>
+                <br><br><h4>Drink</h4>
             </div>
             <div class="col-sm">
                 <img class="home_images" src="{{ url_for('static', filename='images/play.jpg') }}" class="rounded" alt="Generic image of a dice game. Photo by Sarah Pflug from Burst" height="170">
-                <br><h4>Play</h4>
+                <br><br><h4>Play</h4>
             </div>
         </div>
-
-        </div>
+    </div>
     <!-- End image layout -->
-
-
-
-
-
-        <br>
-        <br>
-        <h4>Upcoming events... </h4>
-        <p>We have regular themed events to bring gamers together.</p>
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
+    <br>
+    <br>
+    <!-- Carousel -->
+    <div class="card">
+        <div class="card-body">
+            <h4>Upcoming Events</h4>
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
             <div  class="carousel-item active">
                 <a href="{{ url_for('add_booking') }}"><img src="{{ url_for('static', filename='images/advert1.jpg') }}" class="d-block mx-auto rounded" data-bs-interval="3000" height="300" alt=".."></a>
-              </div>
+            </div>
             <div class="carousel-item">
                 <a href="{{ url_for('add_booking') }}"><img src="{{ url_for('static', filename='images/advert2.jpg')}}" class="d-block mx-auto rounded" data-bs-interval="3000" height="300" alt="..."></a>
-              </div>
+            </div>
             <div class="carousel-item">
                 <a href="{{ url_for('add_booking') }}"><img src="{{ url_for('static', filename='images/advert4.jpg')}}" class="d-block mx-auto rounded" data-bs-interval="3000" height="300" alt="..."></a>
-              </div>
+            </div>
             <div class="carousel-item">
                 <a href="{{ url_for('add_booking') }}"><img src="{{ url_for('static', filename='images/advert3.jpg')}}" class="d-block mx-auto rounded" data-bs-interval="3000" height="300" alt="..."></a>
-              </div>
+            </div>
             <div class="carousel-item">
                 <a href="{{ url_for('add_booking') }}"><img src="{{ url_for('static', filename='images/advert5.jpg')}}" class="d-block mx-auto rounded" data-bs-interval="3000" height="300" alt="..."></a>
-
             </div>
             </div>
             </div>
-
+            </div>
+            </div>
+    <!-- End carousel -->
+        <br>
 
     <!-- Do not type below this line -->
 

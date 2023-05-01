@@ -10,10 +10,13 @@
         {{ form.csrf_token }}
               <div class="row">
             <div class = "mb-6">
-                    {% for message in get_flashed_messages() %}
-                    <br>
-                    <p>{{ message }}</p>
-                    {% endfor %}
+                <!-- System message -->
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning" role="alert">
+                {{ message }}
+                </div>
+                {% endfor %}
+                <!-- End system message -->
                 <div class="col"><h2>Login</h2></div>
                 <br>
             </div>
