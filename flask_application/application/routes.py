@@ -312,14 +312,18 @@ def add_session():
     if current_user.email == "admin@kafv.co.uk":
         form = SessionForm()
         if request.method == "POST":
-            form = SessionForm(request.form)
-            date = form.session_date.data
-            session_type = form.session_type.data
-            tables = form.table_count.data
-            session = Cafesession(session_type=session_type, session_date=date, table_count=tables)
-            service.add_new_session(session)
-            flash("Session added successfully")
-            return redirect(url_for("admin"))
+            if form.validate_on_submit():
+                form = SessionForm(request.form)
+                date = form.session_date.data
+                session_type = form.session_type.data
+                tables = form.table_count.data
+                session = Cafesession(session_type=session_type, session_date=date, table_count=tables)
+                service.add_new_session(session)
+                flash("Session added successfully")
+                return redirect(url_for("admin"))
+            else:
+                flash("There was an error with the submission")
+                redirect(url_for("add_session"))
         return render_template("add-session.html", form=form, title="Add Session")
     else:
         return render_template("401.html", title="Unauthorised")
@@ -332,25 +336,29 @@ def add_new_game():
     if current_user.email == "admin@kafv.co.uk":
         form = GameForm()
         if request.method == "POST":
-            form = GameForm(request.form)
-            game_name = form.game_name.data
-            num_of_players = form.num_of_players.data
-            min_age = form.min_age.data
-            duration_of_play_time = form.duration_of_play_time.data
-            game_description = form.game_description.data
-            gameplay = form.gameplay.data
-            if len(game_name) == 0 or not num_of_players or not min_age or not duration_of_play_time:
+            if form.validate_on_submit():
+                form = GameForm(request.form)
+                game_name = form.game_name.data
+                num_of_players = form.num_of_players.data
+                min_age = form.min_age.data
+                duration_of_play_time = form.duration_of_play_time.data
+                game_description = form.game_description.data
+                gameplay = form.gameplay.data
+                if len(game_name) == 0 or not num_of_players or not min_age or not duration_of_play_time:
+                    flash("There was an error processing your request. Did you enter all the required data")
+                    redirect(url_for("add_new_game"))
+                else:
+                    game = Game(game_name=game_name, num_of_players=num_of_players, min_age=min_age,
+                                duration_of_play_time=duration_of_play_time, gameplay=gameplay,
+                                game_description=game_description)
+                    service.add_new_game(game)
+                    add_stock = Stock(game_id=game.game_id)
+                    service.add_stock(add_stock)
+                    flash("Game added successfully")
+                    return redirect(url_for("admin"))
+            else:
                 flash("There was an error processing your request. Did you enter all the required data")
                 redirect(url_for("add_new_game"))
-            else:
-                game = Game(game_name=game_name, num_of_players=num_of_players,
-                            min_age=min_age, duration_of_play_time=duration_of_play_time, gameplay=gameplay,
-                            game_description=game_description)
-                service.add_new_game(game)
-                add_stock = Stock(game_id=game.game_id)
-                service.add_stock(add_stock)
-                flash("Game added successfully")
-            return redirect(url_for("admin"))
         return render_template("add-game.html", form=form, title="Add Game")
     else:
         return render_template("401.html", title="Unauthorised")
